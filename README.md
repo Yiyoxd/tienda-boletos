@@ -23,7 +23,45 @@ El objetivo es simular el funcionamiento real de un sistema de venta de boletos 
 
 El sistema está organizado siguiendo una arquitectura limpia, dividiendo las responsabilidades entre archivos visibles para el usuario (frontend), lógica del servidor (backend) y estructura de datos (base de datos).
 
-<pre> ```plaintext cine-web/ │ ├── public/ # Archivos accesibles desde el navegador │ ├── index.php # Página de inicio │ ├── cartelera.php # Lista de funciones disponibles │ ├── seleccion.php # Página para elegir asientos │ ├── pago.php # Formulario para realizar el pago │ ├── confirmacion.php # Confirmación del boleto reservado │ ├── login.php # Inicio de sesión │ ├── logout.php # Cierre de sesión │ ├── registro.php # Registro de usuario │ ├── perfil.php # Perfil del usuario (historial) │ ├── procesar_pago.php # Archivo que procesa la compra │ ├── procesar_reserva.php # Maneja los asientos seleccionados │ ├── api_asientos.php # Devuelve los asientos disponibles (JSON) │ ├── api_funciones.php # Devuelve funciones disponibles (JSON) │ ├── api_peliculas.php # Devuelve info de películas (JSON) │ ├── css/ # Archivos de estilos │ ├── js/ # Scripts JS (asientos, funciones, etc.) │ └── img/ # Imágenes (carteles, logos, etc.) │ ├── app/ # Lógica del sistema │ ├── controllers/ # Controladores que gestionan peticiones y respuestas │ ├── models/ # Clases que representan entidades del sistema │ └── views/ # Fragmentos HTML reutilizables (cabecera, pie, etc.) │ ├── config/ │ └── db.php # Archivo de configuración de la base de datos │ ├── sql/ │ └── cine_schema.sql # Script SQL para crear las tablas del sistema │ ├── lib/ │ └── functions.php # Funciones auxiliares reutilizables │ └── README.md # Documento explicativo del proyecto ``` </pre>
+```plaintext
+cine-web/
+│
+├── public/                  # Archivos accesibles desde el navegador
+│   ├── index.php            # Página de inicio
+│   ├── cartelera.php        # Lista de funciones disponibles
+│   ├── seleccion.php        # Página para elegir asientos
+│   ├── pago.php             # Formulario para realizar el pago
+│   ├── confirmacion.php     # Confirmación del boleto reservado
+│   ├── login.php            # Inicio de sesión
+│   ├── logout.php           # Cierre de sesión
+│   ├── registro.php         # Registro de usuario
+│   ├── perfil.php           # Perfil del usuario (historial)
+│   ├── procesar_pago.php    # Archivo que procesa la compra
+│   ├── procesar_reserva.php # Maneja los asientos seleccionados
+│   ├── api_asientos.php     # Devuelve los asientos disponibles (JSON)
+│   ├── api_funciones.php    # Devuelve funciones disponibles (JSON)
+│   ├── api_peliculas.php    # Devuelve info de películas (JSON)
+│   ├── css/                 # Archivos de estilos
+│   ├── js/                  # Scripts JS (asientos, funciones, etc.)
+│   └── img/                 # Imágenes (carteles, logos, etc.)
+│
+├── app/                     # Lógica del sistema
+│   ├── controllers/         # Controladores que gestionan peticiones y respuestas
+│   ├── models/              # Clases que representan entidades del sistema
+│   └── views/               # Fragmentos HTML reutilizables (cabecera, pie, etc.)
+│
+├── config/
+│   └── db.php               # Archivo de configuración de la base de datos
+│
+├── sql/
+│   └── cine_schema.sql      # Script SQL para crear las tablas del sistema
+│
+├── lib/
+│   └── functions.php        # Funciones auxiliares reutilizables
+│
+└── README.md                # Documento explicativo del proyecto
+```
+
 ## 👥 Roles y trabajo en equipo
 
 El equipo de desarrollo se divide en tres roles principales para trabajar de forma paralela:
