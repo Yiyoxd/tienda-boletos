@@ -1,0 +1,40 @@
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Archivos temporales y de backup
+*.log
+*.tmp
+*.bak
+*.swp
+
+# Configuraciones de entorno
+.env
+.env.local
+config/db.php  # ⚠️ Solo si contiene credenciales sensibles
+
+# Cachés y sesiones
+cache/
+*.cache
+*.session
+
+# IDEs
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# XAMPP, WAMP, Laragon u otros
+*.sql
+*.db
+*.sqlite
+
+# Archivos de sistema operativo
+ehthumbs.db
+Icon?
+__MACOSX/
+
+# Archivos de subida grandes u opcionales
+/public/img/uploads/
+uploads/
