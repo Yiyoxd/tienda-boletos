@@ -1,7 +1,8 @@
 <?php
 
-require_once "app/models/Usuario.php";
-require_once ".lib/functions.php";
+require_once __DIR__ ."/../models/Usuario.php";
+require_once __DIR__ . "/../../lib/functions.php";
+
 
 class UsuarioController {
     public function login(Usuario $usuario) {
@@ -13,7 +14,12 @@ class UsuarioController {
                 Functions::respuesta(401, false, "Correo o contraseña incorrectos");
             }
         } catch (Exception $e) {
-            Functions::error_interno();
+            Functions::respuesta(
+                500,
+                false,
+                "Error Interno",
+                ["exception" => $e->getMessage()]
+            );
         }
     }
 
@@ -26,6 +32,7 @@ class UsuarioController {
                     false, 
                     "Correo ya registrado"
                 );
+                return;
             }
 
             $ok = $usuario->registrar();
@@ -34,7 +41,12 @@ class UsuarioController {
             Functions::respuesta($status, $ok, $mensaje);
 
         } catch (Exception $e) {
-            Functions::error_interno();
+            Functions::respuesta(
+                500,
+                false,
+                "Error Interno",
+                ["exception" => $e->getMessage()]
+            );
         }
     }
 }

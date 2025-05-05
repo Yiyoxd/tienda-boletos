@@ -17,7 +17,7 @@ class LimpiarDatos {
         $texto = self::minusculas($texto);
         $texto = self::eliminarEspacios($texto);
         return $texto;
-    }
+    } 
 
     public static function normalizarDatos($datos) : array{
         foreach ($datos as $clave => $valor) {
