@@ -93,7 +93,7 @@
         mensajeDiv.style.display = 'none';
         const correo = document.getElementById("correo").value.trim();
         const password = document.getElementById("password").value;
-
+        
         try {
             const res = await fetch("http://localhost/tienda-boletos/public/api_usuarios.php?accion=login", {
                 method: "POST",

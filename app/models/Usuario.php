@@ -42,12 +42,12 @@ class Usuario {
             return false;
         }
 
-        $stmt = Consultas::ejecutar(
+        $stmt = Consultas::ejecutar (
             "INSERT INTO usuarios (nombre, email, password) VALUES (?, ?, ?)",
             "sss",
             [$this->nombre, $this->correo, $this->contrasena]
         );
-
+        
         $ok = ($stmt->affected_rows === 1);
         $stmt->close();
         return $ok;

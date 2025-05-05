@@ -43,10 +43,10 @@ $data = json_decode(file_get_contents("php://input"), true);
 $accion = $_GET["accion"] ?? "";
 
 try {
-    $nombre     = LimpiarDatos::normalizarTexto($data["nombre"] ?? "");
+    $nombre     = LimpiarDatos::normalizarTextoCapital($data["nombre"] ?? "");
     $correo     = LimpiarDatos::normalizarTexto($data["correo"] ?? "");
     $contrasena = $data["password"] ?? "";
-
+    
     $usuario = new Usuario($nombre, $correo, $contrasena);
     $controller = new UsuarioController();
 
