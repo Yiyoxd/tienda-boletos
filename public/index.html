@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cinetix</title>
+    <link rel="preload" href="css/normalize.css" as="style">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link href="https://fonts.googleapis.com/css2?family=Krub:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="preload" href="css/style.css" as="style">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <!-- CAMBIO: Título más grande y con menos espacio arriba/abajo -->
+        <h1 class="titulo">Cinetix <span>Tu cine favorito</span></h1>
+    </header>
+
+    <div class="nav-bg">
+        <nav class="navegacion-principal contenedor">
+          <div class="nav-izquierda">
+            <a href="#">Inicio</a>
+            <a href="#quienes">Quiénes somos</a>
+            <a href="#">Catálogo</a>
+          </div>
+      
+          <div class="nav-derecha">
+            <a href="#contacto">Contacto</a>
+            <a href="#">Login</a>
+            <a href="#" class="boton-registro">Registro</a>
+          </div>
+        </nav>
+      </div>
+      
+    <section class="hero">
+        <div class="contenido-hero">
+            <h2>"Ya no quiero vivir en un agujero"</h2>
+            <p>- Mr. Fox</p>
+            <a class="boton" href="#">Consultar Cartelera</a>
+        </div>
+    </section>
+
+    <main class="contenedor sombra">
+        <!-- CAMBIO: Sección de estrenos -->
+        <section class="estrenos">
+            <h1>Próximos Estrenos</h1>
+            <div class="peliculas-grid">
+                <div class="pelicula">
+                    <img src="img/estreno1.jpg" alt="Memorias de un caracol">
+                    <h3>Memorias de un caracol</h3>
+                    <p>Estreno: 15 de mayo</p>
+                </div>
+                <div class="pelicula">
+                    <img src="img/estreno2.jpg" alt="Mickey 17">
+                    <h3>Mickey 17</h3>
+                    <p>Estreno: 22 de mayo</p>
+                </div>
+            </div>
+        </section>
+
+        <section id = "quienes" class="quienes-somos">
+                <div class="contenido-quienes">
+                  <div class="texto-quienes">
+                    <h2>¿Quiénes somos?</h2>
+                    <p>
+                        El cine nació a finales del siglo XIX como una forma de capturar y proyectar movimiento. Desde las primeras funciones de los hermanos Lumière en 1895, ha evolucionado hasta convertirse en una de las formas de arte más influyentes en el mundo.
+                        </p>
+                        <p>
+                        Cinetix es el primer cine fundado en Francisco I. Madero, Coahuila, con la misión de acercar la magia del séptimo arte a nuestra comunidad. Nos enorgullece ser un espacio que rinde homenaje a la historia del cine, al mismo tiempo que impulsa nuevas experiencias para todos nuestros visitantes. En Cinetix, traemos lo mejor del cine... a ti.
+                        </p>
+                  </div>
+                  <div class="imagen-quienes">
+                    <img src="img/image.png" alt="Historia del cine">
+                  </div>
+                </div>
+        </section>
+              </main>
+
+              <section id="contacto" class="contacto-footer">
+                <div class="contenedor-contacto">
+                  <div class="info-contacto">
+                    <h2 class="titulo-contacto">Contáctanos</h2>
+                    <p class="telefono-contacto">📞 55 21 22 60 60</p>
+                  </div>
+              
+                  <form class="formulario-contacto">
+                    <div class="campo-footer">
+                      <label for="nombre">Nombre</label>
+                      <input type="text" id="nombre" placeholder="Tu nombre" />
+                    </div>
+              
+                    <div class="campo-footer">
+                      <label for="email">Correo electrónico</label>
+                      <input type="email" id="email" placeholder="tucorreo@ejemplo.com" />
+                    </div>
+              
+                    <div class="campo-footer campo-textarea">
+                      <label for="mensaje">¿Tienes una queja o sugerencia?</label>
+                      <textarea id="mensaje" rows="4" placeholder="Escribe tu mensaje aquí..."></textarea>
+                    </div>
+              
+                    <button type="submit" class="boton-footer">Enviar</button>
+                  </form>
+                </div>
+              </section>
+              
+    <footer class="footer">
+        <p>Todos los derechos reservados. Cinetix 2025</p>
+    </footer>
+</body>
+</html>
