@@ -8,34 +8,58 @@
     --grisClaro: hsl(0, 0%, 84%);
     --rojoBajo: #e74c3c;
     --rojoAlto: rgb(159, 38, 24);
+    --azul: #0d1b2a;
 }
 
 /* ===== RESET GLOBAL ===== */
 html {
     font-size: 62.5%;
     box-sizing: border-box;
-    scroll-snap-type: y mandatory;
     scroll-behavior: smooth;
 }
 *, *::before, *::after {
     box-sizing: inherit;
 }
+:root {
+    --navbar-height: 70px;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --navbar-height: 240px;
+  }
+}
+
 body {
-    padding-top: 70px;
+    padding-top: var(--navbar-height);
     font-size: 16px;
     font-family: 'Krub', sans-serif;
-    background-image: linear-gradient(to top, var(--grisClaro) 0%, var(--blanco) 100%);
+    background-image: linear-gradient(to top, var(--grisClaro) 0%, var(--blanco) 100% );
 }
+
+
 .contenedor {
     max-width: 120rem;
     margin: 0 auto;
     padding: 0 2rem;
+    
 }
+
+.logo a {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 3.8rem; 
+    color: var(--primario);
+    text-decoration: none;
+    margin-right: 2rem;
+    line-height: 1;
+}
+
+
 
 /* ===== TÍTULOS ===== */
 h1 {
     font-size: 6rem;
-    margin: 1rem 0;
+    margin: 0rem 0;
     text-align: center;
     font-family: 'Bebas Neue', cursive;
     text-transform: uppercase;
@@ -53,6 +77,7 @@ h3 {
 }
 .titulo span {
     font-size: 2.2rem;
+    color: var(--primario)
 }
 
 /* ===== BOTONES ===== */
@@ -83,7 +108,9 @@ h3 {
     top: 0;
     z-index: 1000;
 }
+
 .navegacion-principal {
+    background-color: var(--secundario); /* por si el fondo se ve blanco */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -92,6 +119,7 @@ h3 {
     max-width: 120rem;
     margin: 0 auto;
 }
+
 .nav-izquierda,
 .nav-derecha {
     display: flex;
@@ -216,6 +244,9 @@ h3 {
     padding: 3rem 2rem 4rem 3rem;
     background-color: var(--blanco);
     margin-bottom: 6rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    overflow:visible;
 }
 .contenido-quienes {
     display: flex;
@@ -235,7 +266,7 @@ h3 {
     font-family: 'Bebas Neue', cursive;
     font-size: 5rem;
     margin-bottom: 2rem;
-    color: var(--rojoAlto);
+    color: var(--primario);
 }
 .texto-quienes p {
     font-size: 1.8rem;
@@ -255,10 +286,14 @@ h3 {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
+/* ===== SCROLL AJUSTE NAVBAR ===== */
+#quienes {
+    scroll-margin-top: 8rem; }
+
 /* ===== SECCIÓN CONTACTO ===== */
 .contacto-footer {
     margin-top: 4rem;
-    background-color: #0d1b2a;
+    background-color: var(--azul);
     color: #ffffff;
     padding: 2rem 0;
     width: 100%;
@@ -350,7 +385,110 @@ h3 {
     margin-top: 0rem;
 }
 
-/* ===== SCROLL AJUSTE NAVBAR ===== */
-#quienes {
-    scroll-margin-top: 7rem;
+
+.pelicula-flex {
+    display: flex;
+    gap: 2rem;
+    background-color: var(--blanco);
+    padding: 2rem;
+    margin-bottom: 2.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    align-items: flex-start; 
+    flex-wrap: wrap;
+    min-height: 240px; 
 }
+
+
+
+  .titulo-cartelera {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 6rem;
+    text-align: center;
+    color: var(--primario);
+    margin: 0rem 0rem 0rem 0rem;
+}
+
+.descripcion-cartelera {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 4rem;
+    color: var(--blanco);
+}
+
+  
+  .pelicula-imagen img {
+    width: 180px;
+    height: auto;
+    border-radius: 1rem;
+  }
+  
+  .pelicula-info h3 {
+    font-size: 3rem;
+    color: var(--secundario);
+    margin-top: 6rem;
+    text-align: left;
+    font-family: 'Arial', serif;
+}
+
+  
+  .pelicula-info p {
+    margin: 0.5rem 0;
+    font-size: 1.6rem;
+    color: var(--negro);
+    padding-bottom: 1rem;
+  }
+  
+  .horarios button {
+    background-color: var(--azul);
+    color: var(--blanco);
+    border: none;
+    padding: 0.6rem 1.2rem;
+    margin: 0.3rem;
+    font-size: 1.4rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+  }
+  
+  .horarios button:hover {
+    background-color: var(--rojoAlto);
+  }
+  
+  .encabezado-cartelera {
+    background-color: var(--azul);
+    padding: 3rem 2rem 1.5rem 2rem; 
+    text-align: center;
+    width: 100%;
+    border-bottom: 1px solid #ccc;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 2rem;
+}
+
+
+  @media (max-width: 768px) {
+    .pelicula-flex {
+      flex-direction: column;
+      text-align: center;
+      align-items: center;
+    }
+  
+    .pelicula-imagen img {
+      width: 100%;
+      max-width: 250px;
+      height: auto;
+    }
+  
+    .pelicula-info {
+      width: 100%;
+    }
+  
+    .pelicula-info h3 {
+      text-align: center;
+    }
+  }
+  
+  
+
+  
+
+  
