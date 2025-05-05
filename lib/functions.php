@@ -1,10 +1,11 @@
 <?php
 
 class Functions {
-    public static function respuesta($codigo, $succes, $mensaje, $data = null) {
-        http_response_code(200);
+    public static function respuesta($codigo, $success, $mensaje, $data = null) {
+        http_response_code($codigo);
+        header("Content-Type: application/json");
         echo json_encode([
-            "succes" => $succes,
+            "success" => $success,
             "message" => $mensaje,
             "data" => $data
         ]);

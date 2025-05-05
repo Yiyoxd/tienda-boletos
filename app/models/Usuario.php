@@ -1,47 +1,68 @@
 <?php
-require_once "core/Conexion.php";
-require_once "core/Consultas.php";
+require_once __DIR__ ."/../../core/Conexion.php";
+require_once __DIR__ ."/../../core/Consultas.php";
 
 class Usuario {
     private $nombre, $correo, $contrasena;
 
     public function __construct($nombre, $correo, $contrasena) {
-        $this->nombre = $nombre;
-        $this->correo = $correo;
+        $this->nombre     = $nombre;
+        $this->correo     = $correo;
         $this->contrasena = $contrasena;
     }
 
     public function login() {
-        $consulta = Consultas::ejecutar (
-            "Select * from usuarios where email = ? and password = ?",
+        $stmt = Consultas::ejecutar(
+            "SELECT id, nombre, email, fecha_registro FROM usuarios WHERE email = ? AND password = ?",
             "ss",
             [$this->correo, $this->contrasena]
         );
-        
-        return $consulta->get_result()->fetch_assoc();
+
+        if ($stmt->num_rows === 0) {
+            $stmt->free_result();
+            $stmt->close();
+            return false;
+        }
+
+        $stmt->bind_result($id, $nombre, $email, $fecha_registro);
+        $stmt->fetch();
+        $stmt->free_result();
+        $stmt->close();
+
+        return [
+            'id'     => $id,
+            'nombre' => $nombre,
+            'email'  => $email,
+            'fecha_registro'=> $fecha_registro
+        ];
     }
 
     public function registrar() {
         if ($this->correoExistente()) {
             return false;
         }
-        
-        $consulta = Consultas::ejecutar (
-            "insert into usuarios (nombre, email, password) values (?, ?, ?)",
+
+        $stmt = Consultas::ejecutar(
+            "INSERT INTO usuarios (nombre, email, password) VALUES (?, ?, ?)",
             "sss",
             [$this->nombre, $this->correo, $this->contrasena]
         );
 
-        return $consulta->num_rows == 1;
+        $ok = ($stmt->affected_rows === 1);
+        $stmt->close();
+        return $ok;
     }
 
     public function correoExistente() {
-        $consulta = Consultas::ejecutar (
-            "select * from usuarios where email = ?",
+        $stmt = Consultas::ejecutar(
+            "SELECT 1 FROM usuarios WHERE email = ?",
             "s",
-            $this->correo
+            [$this->correo]
         );
 
-        return $consulta->num_rows > 0;
+        $exists = ($stmt->num_rows > 0);
+        $stmt->free_result();
+        $stmt->close();
+        return $exists;
     }
 }
