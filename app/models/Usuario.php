@@ -22,6 +22,10 @@ class Usuario {
     }
 
     public function registrar() {
+        if ($this->correoExistente()) {
+            return false;
+        }
+        
         $consulta = Consultas::ejecutar (
             "insert into usuarios (nombre, email, password) values (?, ?, ?)",
             "sss",
@@ -29,5 +33,15 @@ class Usuario {
         );
 
         return $consulta->num_rows == 1;
+    }
+
+    public function correoExistente() {
+        $consulta = Consultas::ejecutar (
+            "select * from usuarios where email = ?",
+            "s",
+            $this->correo
+        );
+
+        return $consulta->num_rows > 0;
     }
 }
