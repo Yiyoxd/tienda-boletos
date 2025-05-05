@@ -1,195 +1,156 @@
-/* =============================================== */
-/* =============== VARIABLES GLOBALES ============ */
-/* =============================================== */
+/* ===== VARIABLES GLOBALES ===== */
 :root {
-    --blanco: #ffffff; /* Color blanco */
-    --negro: #212121; /* Color negro oscuro */
-    --primario: #FFD700; /* Amarillo cine, usado para destacar botones o enlaces */
-    --secundario: #B22222; /* Rojo profundo, color principal para botones o acentos */
-    --gris: #757575; /* Gris medio, útil para fondos o textos secundarios */
-    --grisClaro: hsl(0, 0%, 84%); /* Gris claro para fondos */
+    --blanco: #ffffff;
+    --negro: #212121;
+    --primario: #FFD700;
+    --secundario: #B22222;
+    --gris: #757575;
+    --grisClaro: hsl(0, 0%, 84%);
     --rojoBajo: #e74c3c;
     --rojoAlto: rgb(159, 38, 24);
 }
 
-/* =============================================== */
-/* =============== RESET GLOBAL ================== */
-/* =============================================== */
+/* ===== RESET GLOBAL ===== */
 html {
-    font-size: 62.5%; /* Convierte 1rem en 10px para cálculos fáciles */
-    box-sizing: border-box; /* Hace que el padding y border no aumenten el tamaño del elemento */
-    scroll-snap-type: y mandatory; /* Desplazamiento vertical con snapping (no siempre necesario) */
+    font-size: 62.5%;
+    box-sizing: border-box;
+    scroll-snap-type: y mandatory;
     scroll-behavior: smooth;
 }
-
 *, *::before, *::after {
-    box-sizing: inherit; /* Hereda el box-sizing definido arriba */
+    box-sizing: inherit;
 }
-
 body {
     padding-top: 70px;
-    font-size: 16px; /* Tamaño base del texto */
-    font-family: 'Krub', sans-serif; /* Fuente principal */
-    background-image: linear-gradient(to top, var(--grisClaro) 0%, var(--blanco) 100%); /* Degradado de fondo */
+    font-size: 16px;
+    font-family: 'Krub', sans-serif;
+    background-image: linear-gradient(to top, var(--grisClaro) 0%, var(--blanco) 100%);
 }
-
 .contenedor {
-    max-width: 120rem; /* Ancho máximo del contenido */
-    margin: 0 auto; /* Centrado horizontal */
-    padding: 0 2rem; /* Espaciado horizontal interno */
+    max-width: 120rem;
+    margin: 0 auto;
+    padding: 0 2rem;
 }
 
-/* =============================================== */
-/* =============== ESTILOS DE TÍTULOS ============ */
-/* =============================================== */
+/* ===== TÍTULOS ===== */
 h1 {
-    font-size: 6rem; /* Tamaño grande para h1 */
-    margin: 1rem 0 1rem 0; /* Espaciado vertical */
-    text-align: center; /* Centrado horizontal */
-    font-family: 'Bebas Neue', cursive; /* Fuente decorativa */
-    text-transform: uppercase; /* Mayúsculas */
-    letter-spacing: 2px; /* Espaciado entre letras */
+    font-size: 6rem;
+    margin: 1rem 0;
+    text-align: center;
+    font-family: 'Bebas Neue', cursive;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
-
 h2 {
     font-size: 3rem;
     text-align: center;
     margin-bottom: 2rem;
 }
-
 h3 {
     font-size: 2rem;
     text-align: center;
-    color: var(--secundario); /* Rojo profundo */
+    color: var(--secundario);
 }
-
 .titulo span {
-    font-size: 2.2rem; /* Subtítulo más pequeño */
+    font-size: 2.2rem;
 }
 
-/* =============================================== */
-/* =============== BOTONES ======================= */
-/* =============================================== */
+/* ===== BOTONES ===== */
 .boton {
-    background-color: var(--secundario); /* Rojo profundo */
-    color: var(--blanco); /* Texto blanco */
-    padding: 1rem 3rem; /* Espaciado interno */
-    margin-top: 1rem; /* Separación superior */
+    background-color: var(--secundario);
+    color: var(--blanco);
+    padding: 1rem 3rem;
+    margin-top: 1rem;
     font-size: 2rem;
-    text-decoration: none; /* Sin subrayado */
+    text-decoration: none;
     font-weight: bold;
-    border-radius: .5rem; /* Bordes redondeados */
+    border-radius: .5rem;
     text-align: center;
-    display: inline-block; /* Permite aplicar tamaño y padding */
-    border: none; /* Sin borde */
+    display: inline-block;
+    border: none;
 }
-
 .boton:hover {
-    background-color: var(--primario); /* Cambia a amarillo al pasar el mouse */
-    color: var(--negro); /* Texto negro */
-    cursor: pointer; /* Muestra la mano */
+    background-color: var(--rojoAlto);
+    color: var(--primario);
+    cursor: pointer;
 }
 
-/* =============================================== */
-/* =============== NAVBAR ======================== */
-/* =============================================== */
-
-/* Contenedor de fondo para cubrir TODO el ancho */
+/* ===== NAVBAR ===== */
 .nav-bg {
-    background-color: var(--secundario); /* Rojo profundo */
-    width: 100%; /* Asegura que cubra todo el ancho de la pantalla */
-    position: fixed;         /* ← Esto lo hace fijo */
-    top: 0;                  /* Se pega a la parte superior */
-    z-index: 1000;           /* Se asegura de estar por encima de otros elementos */
+    background-color: var(--secundario);
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
 }
-
-/* Contenedor principal de navegación (contenido centrado) */
 .navegacion-principal {
-    display: flex; /* Flexbox: organiza horizontalmente por defecto */
-    justify-content: space-between; /* Separa izquierda y derecha */
-    align-items: center; /* Centra verticalmente */
-    padding: 1rem 1rem; /* Espaciado interior */
-    flex-wrap: wrap; /* Permite saltos de línea en pantallas pequeñas */
-    max-width: 120rem; /* Límite de ancho */
-    margin: 0 auto; /* Centrado horizontal */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    flex-wrap: wrap;
+    max-width: 120rem;
+    margin: 0 auto;
 }
-
-/* Secciones izquierda y derecha del nav */
 .nav-izquierda,
 .nav-derecha {
-    display: flex; /* Flex para los links */
-    align-items: center; /* Centra verticalmente */
-    gap: 2rem; /* Espacio entre enlaces */
+    display: flex;
+    align-items: center;
+    gap: 2rem;
 }
-
-/* Estilo para todos los enlaces del nav */
 .navegacion-principal a {
-    color: var(--blanco); /* Texto blanco */
-    text-decoration: none; /* Quita subrayado */
-    font-size: 2.0rem; /* Tamaño de fuente */
-    font-weight: 600; /* Negrita */
+    color: var(--blanco);
+    text-decoration: none;
+    font-size: 2rem;
+    font-weight: 600;
 }
-
-/* Color al pasar el mouse */
 .navegacion-principal a:hover {
-    color: var(--primario); /* Amarillo cine al pasar cursor */
+    color: var(--primario);
 }
-
-/* Botón especial de registro */
 .boton-registro {
-    background-color: var(--rojoBajo); /* Fondo amarillo */
-    color: var(--negro); /* Texto negro */
-    padding: 1rem 2rem; /* Tamaño del botón */
-    border-radius: 0.5rem; /* Bordes redondeados */
+    background-color: var(--rojoBajo);
+    color: var(--negro);
+    padding: 1rem 2rem;
+    border-radius: 0.5rem;
     font-weight: bold;
 }
-
-/* Hover del botón */
 .boton-registro:hover {
-    background-color: var(--rojoAlto); /* Cambia a blanco */
-    color: var(--rojoAlto); /* Texto rojo profundo */
+    background-color: var(--rojoAlto);
+    color: var(--rojoAlto);
 }
 
-/* ========================= */
-/* ======= RESPONSIVE ====== */
-/* ========================= */
+/* ===== NAVBAR RESPONSIVE ===== */
 @media (max-width: 768px) {
     .navegacion-principal {
-        flex-direction: column; /* Apila verticalmente en móvil */
+        flex-direction: column;
         align-items: center;
         text-align: center;
     }
-
     .nav-izquierda,
     .nav-derecha {
-        flex-direction: column; /* Columna en móvil */
+        flex-direction: column;
         gap: 1rem;
         margin-bottom: 1rem;
     }
-
     .boton-registro {
         padding: 0.8rem 2rem;
         font-size: 1.6rem;
     }
 }
 
-
-/* =============================================== */
-/* =============== SECCIÓN HERO ================== */
-/* =============================================== */
+/* ===== HERO PRINCIPAL ===== */
 .hero {
     background-image: url("../img/hero.jpg");
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center top; /* Enfoca la parte superior */
+    background-position: center top;
     height: 440px;
     position: relative;
     margin-bottom: 2rem;
 }
-
 .contenido-hero {
     position: absolute;
-    background-color: rgb(0 0 0 / 40%); /* Fondo oscuro semitransparente */
+    background-color: rgb(0 0 0 / 40%);
     width: 100%;
     height: 100%;
     display: flex;
@@ -198,194 +159,151 @@ h3 {
     align-items: center;
     text-align: center;
 }
-
-.contenido-hero h2 {
+.contenido-hero h2, .contenido-hero p {
     color: var(--blanco);
-    font-size: 3.2rem;
-    margin: 0 0 1rem 0;
 }
-
+.contenido-hero h2 {
+    font-size: 3.2rem;
+    margin-bottom: 1rem;
+}
 .contenido-hero p {
-    color: var(--blanco);
     font-size: 1.8rem;
 }
 
-.ubicacion {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1rem;
-    color: var(--blanco);
-}
-
-/* =============================================== */
-/* =============== PELÍCULAS ===================== */
-/* =============================================== */
-
-/* Espaciado inferior general de la sección */
+/* ===== PELÍCULAS / ESTRENOS ===== */
 .estrenos {
     margin-bottom: 4rem;
-    padding-top: 3rem; /* Separa del encabezado superior */
+    padding-top: 3rem;
 }
-
-/* Título de sección */
 .estrenos h2 {
     margin-bottom: 3rem;
     font-size: 3.2rem;
 }
-
-/* Tarjeta individual de película */
 .pelicula {
-    background-color: var(--blanco);               /* Fondo blanco (el "borde" que se ve) */
-    border-radius: 0.5rem;                          /* Bordes ligeramente redondeados */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);       /* Sombra suave para levantar la tarjeta */
-    overflow: hidden;                               /* Oculta partes que sobresalgan */
-    margin-bottom: 1rem;                            /* Espacio entre tarjetas */
-    text-align: center;                             /* Centra texto */
-    padding: 1rem;                                   /* Margen interno más pequeño para el "borde blanco" */
+    background-color: var(--blanco);
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin-bottom: 1rem;
+    text-align: center;
+    padding: 1rem;
 }
-
-/* Imagen de la película */
 .pelicula img {
-    width: 100%;              /* Se adapta al ancho del contenedor */
-    height: 400px;            /* Altura fija más baja que antes */
-    object-fit: contain;      /* Muestra la imagen completa, aunque deje espacio en blanco */
-    display: block;           /* Elimina espacios indeseados abajo */
-    margin: 0 auto;           /* Centrada horizontalmente si sobra espacio */
+    width: 100%;
+    height: 400px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
 }
-
-/* Título de la película */
 .pelicula h3 {
     margin: 1rem 0;
     color: var(--secundario);
     font-size: 1.8rem;
 }
-
-/* Botón (si lo agregas en futuro) */
 .pelicula .boton {
     margin-bottom: 1rem;
 }
-
-/* GRID en pantallas grandes */
 @media (min-width: 768px) {
     .peliculas-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Autoajusta el número de columnas */
-        gap: 2rem; /* Separación entre tarjetas */
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
     }
 }
 
-
+/* ===== SECCIÓN QUIÉNES SOMOS ===== */
 .quienes-somos {
-    padding: 3rem 2rem 4rem 3rem; /* top right bottom left Espaciado interno: 4rem arriba/abajo y 2rem a los lados */
-    background-color: var(--blanco); /* Fondo blanco neutro para diferenciar del contacto */
+    padding: 3rem 2rem 4rem 3rem;
+    background-color: var(--blanco);
     margin-bottom: 6rem;
 }
-
 .contenido-quienes {
-    display: flex;               /* Flexbox para alinear texto e imagen horizontalmente */
-    flex-direction: row;         /* Dirección horizontal por defecto */
-    gap: 2rem;                   /* Espacio entre los dos bloques (texto e imagen) */
-    align-items: center;         /* Centra verticalmente los contenidos */
-    justify-content: space-between; /* Deja espacio entre los elementos */
-    max-width: 1200px;           /* Límite de ancho para que no se vea gigante en pantallas grandes */
-    margin: 0 auto;              /* Centrado horizontal */
-    flex-wrap: wrap;             /* Permite que en pantallas pequeñas se acomode en columna */
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    flex-wrap: wrap;
 }
-
 .texto-quienes {
-    flex: 1;              /* Ocupa mismo espacio que la imagen (50/50) */
-    min-width: 300px;     /* Nunca será más chico que 300px */
+    flex: 1;
+    min-width: 300px;
 }
-
 .texto-quienes h2 {
     font-family: 'Bebas Neue', cursive;
-    font-size: 5rem;            /* Título grande */
-    margin-bottom: 2rem;        /* Espacio debajo del título */
-    color: var(--rojoAlto);   /* Color rojo profundo (como el botón) */
+    font-size: 5rem;
+    margin-bottom: 2rem;
+    color: var(--rojoAlto);
 }
-
 .texto-quienes p {
-    font-size: 1.8rem;    /* Tamaño del texto */
-    line-height: 1.6;     /* Espaciado entre líneas */
-    color: var(--negro);          /* Gris oscuro para buena lectura */
+    font-size: 1.8rem;
+    line-height: 1.6;
+    color: var(--negro);
     text-align: justify;
 }
-
 .imagen-quienes {
-    flex: 1;              /* Igual que texto, para que ocupen el mismo ancho */
-    min-width: 300px;     /* Ancho mínimo */
-    text-align: center;   /* Centra horizontalmente la imagen */
+    flex: 1;
+    min-width: 300px;
+    text-align: center;
 }
-
 .imagen-quienes img {
-    width: 100%;               /* Que ocupe todo su contenedor */
-    max-width: 500px;          /* No más grande que 500px */
-    border-radius: 1rem;       /* Bordes redondeados */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Sombrilla sutil para destacar la imagen */
+    width: 100%;
+    max-width: 500px;
+    border-radius: 1rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
-  
-  
-
-/* ===== CONTACTO FOOTER ===== */
-/* ===== SECCIÓN DE CONTACTO (pegada al footer y ancho total) ===== */
+/* ===== SECCIÓN CONTACTO ===== */
 .contacto-footer {
-    margin-top: 4rem; /* ← Añade esta línea para separar visualmente del bloque anterior */
-    background-color: #0d1b2a; /* Azul oscuro completo */
+    margin-top: 4rem;
+    background-color: #0d1b2a;
     color: #ffffff;
     padding: 2rem 0;
     width: 100%;
     margin: 0;
-  }
-  
-  .contenedor-contacto {
+}
+.contenedor-contacto {
     width: 100%;
     max-width: 120rem;
-    margin: 0 auto; /* Centra el contenido interno */
+    margin: 0 auto;
     padding: 0 2rem;
-  }
-  
-  .info-contacto {
+}
+.info-contacto {
     text-align: center;
     margin-bottom: 2rem;
-  }
-  
-  .titulo-contacto {
+}
+.titulo-contacto {
     font-size: 2.4rem;
     font-weight: bold;
     color: #f1c40f;
-  }
-  
-  .telefono-contacto {
+}
+.telefono-contacto {
     font-size: 1.6rem;
     color: #e0e0e0;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 0.5rem;
-  }
-  
-  .formulario-contacto {
+}
+.formulario-contacto {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 1.5rem;
-  }
-  
-  .campo-footer {
+}
+.campo-footer {
     display: flex;
     flex-direction: column;
-  }
-  
-  .campo-footer label {
+}
+.campo-footer label {
     font-weight: 600;
     margin-bottom: 0.5rem;
     color: #e0e0e0;
     font-size: 1.4rem;
-  }
-  
-  .campo-footer input,
-  .campo-footer textarea {
+}
+.campo-footer input,
+.campo-footer textarea {
     padding: 0.8rem 1rem;
     border-radius: 0.5rem;
     border: none;
@@ -393,18 +311,15 @@ h3 {
     background-color: #15293f;
     color: #ffffff;
     width: 100%;
-  }
-  
-  .campo-footer input::placeholder,
-  .campo-footer textarea::placeholder {
+}
+.campo-footer input::placeholder,
+.campo-footer textarea::placeholder {
     color: #b0b0b0;
-  }
-  
-  .campo-textarea {
+}
+.campo-textarea {
     grid-column: span 2;
-  }
-  
-  .boton-footer {
+}
+.boton-footer {
     grid-column: span 2;
     padding: 1rem;
     background-color: var(--secundario);
@@ -415,23 +330,18 @@ h3 {
     cursor: pointer;
     font-size: 1.6rem;
     transition: background-color 0.3s ease;
-  }
-  
-  .boton-footer:hover {
+}
+.boton-footer:hover {
     background-color: var(--rojoBajo);
-  }
-  
-  /* Responsive */
-  @media (max-width: 600px) {
+}
+@media (max-width: 600px) {
     .campo-textarea,
     .boton-footer {
-      grid-column: span 1;
+        grid-column: span 1;
     }
-  }
+}
 
-/* =============================================== */
-/* =============== FOOTER ======================== */
-/* =============================================== */
+/* ===== FOOTER GENERAL ===== */
 .footer {
     text-align: center;
     padding: 2rem;
@@ -440,6 +350,7 @@ h3 {
     margin-top: 0rem;
 }
 
+/* ===== SCROLL AJUSTE NAVBAR ===== */
 #quienes {
-    scroll-margin-top: 7rem; /* Ajusta según la altura de tu navbar */
-  }
+    scroll-margin-top: 7rem;
+}
