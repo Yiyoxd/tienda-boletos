@@ -1,18 +1,20 @@
 <?php
 
+// Mostrar y loggear errores de forma brutal
 ini_set("display_errors", 1);
 ini_set("display_startup_errors", 1);
 ini_set("log_errors", 1);
-ini_set("error_log", __DIR__ . '/../logs/error.log');
+ini_set("error_log", __DIR__ . '/../logs/error.log'); // Asegúrate de que exista la carpeta logs/
 error_reporting(E_ALL);
 
+// Handlers para errores fatales
 set_exception_handler(function($e) {
     error_log("[EXCEPTION] " . $e->getMessage() . " en " . $e->getFile() . ":" . $e->getLine());
     http_response_code(500);
     echo json_encode([
         "success" => false,
         "message" => "Error del servidor",
-        "error"   => $e->getMessage()
+        "error" => $e->getMessage()
     ]);
     exit;
 });
@@ -28,38 +30,33 @@ set_error_handler(function($errno, $errstr, $errfile, $errline) {
     exit;
 });
 
-require_once __DIR__ . "/../app/models/Pelicula.php";
+
+require_once __DIR__ . "/../app/models/Usuario.php";
 require_once __DIR__ . "/../lib/functions.php";
-require_once __DIR__ . "/../app/controllers/PeliculaController.php";
+require_once __DIR__ . "/../app/controllers/UsuarioController.php";
 require_once __DIR__ . "/../lib/LimpiarDatos.php";
 
 header("Content-Type: application/json");
 
+// Leer datos del cuerpo de la petición
 $data = json_decode(file_get_contents("php://input"), true);
 $accion = $_GET["accion"] ?? "";
 
 try {
-    $controller = new PeliculaController();
+    $nombre     = LimpiarDatos::normalizarTextoCapital($data["nombre"] ?? "");
+    $correo     = LimpiarDatos::normalizarTexto($data["correo"] ?? "");
+    $contrasena = $data["password"] ?? "";
+    
+    $usuario = new Usuario($nombre, $correo, $contrasena);
+    $controller = new UsuarioController();
 
     switch ($accion) {
+        case "login":
+            $controller->login($usuario);
+            break;
+
         case "registrar":
-            $titulo        = LimpiarDatos::normalizarTextoCapital($data["titulo"] ?? "");
-            $descripcion   = $data["descripcion"] ?? "";
-            $duracion      = (int)($data["duracion"] ?? 0);
-            $clasificacion = LimpiarDatos::normalizarTextoMayus($data["clasificacion"] ?? "");
-            $imagen        = $data["imagen"] ?? "";
-            $estado        = LimpiarDatos::normalizarTexto($data["estado"] ?? "activa");
-
-            $controller->registrar($titulo, $descripcion, $duracion, $clasificacion, $imagen, $estado);
-            break;
-            
-        case "obtener":
-            $id = (int)($data["id"] ?? 0);
-            $controller->obtener($id);
-            break;
-
-        case "listar":
-            $controller->obtenerTodas();
+            $controller->registrar($usuario);
             break;
 
         default:
