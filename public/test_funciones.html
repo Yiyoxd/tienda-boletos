@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Probar API Funciones</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      padding: 2rem;
+    }
+    .formulario {
+      background-color: white;
+      border-radius: 8px;
+      padding: 2rem;
+      max-width: 500px;
+      margin: 0 auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .formulario h2 {
+      margin-top: 0;
+      text-align: center;
+    }
+    .formulario input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+    .botones {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: space-between;
+    }
+    .botones button {
+      flex: 1 1 48%;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    .registrar { background-color: #28a745; }
+    .obtener { background-color: #007bff; }
+    .listar { background-color: #6c757d; }
+    .por-pelicula { background-color: #17a2b8; }
+    .mensaje {
+      margin-top: 1rem;
+      padding: 10px;
+      border-radius: 5px;
+      display: none;
+      font-size: 0.95rem;
+      white-space: pre-wrap;
+    }
+    .mensaje.success {
+      background-color: #d4edda;
+      color: #155724;
+    }
+    .mensaje.error {
+      background-color: #f8d7da;
+      color: #721c24;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="formulario">
+    <h2>Probar API de Funciones</h2>
+    <input type="number" id="pelicula_id" placeholder="ID de película">
+    <input type="date" id="fecha" placeholder="Fecha">
+    <input type="time" id="hora" placeholder="Hora">
+    <input type="number" id="precio" placeholder="Precio">
+    <input type="number" id="funcion_id" placeholder="ID de función a buscar">
+    <input type="number" id="pelicula_id_buscar" placeholder="ID de película a listar funciones">
+    
+    <div class="botones">
+      <button class="registrar" onclick="registrar()">Registrar</button>
+      <button class="obtener" onclick="obtener()">Obtener</button>
+      <button class="listar" onclick="listar()">Listar todas</button>
+      <button class="por-pelicula" onclick="porPelicula()">Por Película</button>
+    </div>
+
+    <div id="mensaje" class="mensaje"></div>
+  </div>
+
+  <script>
+    const mensajeDiv = document.getElementById("mensaje");
+
+    function mostrarMensaje(texto, tipo = "success") {
+      mensajeDiv.textContent = (typeof texto === "string") ? texto : JSON.stringify(texto, null, 2);
+      mensajeDiv.className = "mensaje " + (tipo === "success" ? "success" : "error");
+      mensajeDiv.style.display = "block";
+    }
+
+    async function registrar() {
+      const payload = {
+        pelicula_id: parseInt(document.getElementById("pelicula_id").value),
+        fecha: document.getElementById("fecha").value,
+        hora: document.getElementById("hora").value,
+        precio: parseFloat(document.getElementById("precio").value)
+      };
+
+      try {
+        const res = await fetch("http://localhost/tienda-boletos/public/api_funciones.php?accion=registrar", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        mostrarMensaje(data.message, data.success ? "success" : "error");
+      } catch (err) {
+        mostrarMensaje("Error de red: " + err.message, "error");
+      }
+    }
+
+    async function obtener() {
+      const id = parseInt(document.getElementById("funcion_id").value);
+      if (!id) return mostrarMensaje("Ingresa un ID válido", "error");
+
+      try {
+        const res = await fetch("http://localhost/tienda-boletos/public/api_funciones.php?accion=obtener", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ id })
+        });
+        const data = await res.json();
+        mostrarMensaje(data.data || data.message, data.success ? "success" : "error");
+      } catch (err) {
+        mostrarMensaje("Error de red: " + err.message, "error");
+      }
+    }
+
+    async function listar() {
+      try {
+        const res = await fetch("http://localhost/tienda-boletos/public/api_funciones.php?accion=listar");
+        const data = await res.json();
+        mostrarMensaje(data.data || data.message, data.success ? "success" : "error");
+      } catch (err) {
+        mostrarMensaje("Error de red: " + err.message, "error");
+      }
+    }
+
+    async function porPelicula() {
+      const pelicula_id = parseInt(document.getElementById("pelicula_id_buscar").value);
+      if (!pelicula_id) return mostrarMensaje("Ingresa un ID de película válido", "error");
+
+      try {
+        const res = await fetch("http://localhost/tienda-boletos/public/api_funciones.php?accion=por_pelicula", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ pelicula_id })
+        });
+        const data = await res.json();
+        mostrarMensaje(data.data || data.message, data.success ? "success" : "error");
+      } catch (err) {
+        mostrarMensaje("Error de red: " + err.message, "error");
+      }
+    }
+  </script>
+
+</body>
+</html>
