@@ -1,15 +1,16 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Registro - Cinetix</title>
+  <title>Iniciar Sesión - Cinetix</title>
   <link rel="stylesheet" href="css/normalize.css" />
   <link rel="stylesheet" href="css/style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Krub:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body class="login-body">
-  <div class="overlay"></div>
+    <div class="overlay"></div>
   <div class="nav-bg">
     <nav class="navegacion-principal contenedor">
       <div class="nav-izquierda">
@@ -29,12 +30,8 @@
 
   <main class="contenedor sombra">
     <section class="login">
-      <h2>Registro</h2>
-      <form id="formRegistro" class="formulario">
-        <div class="input-container">
-          <i class="fas fa-user"></i>
-          <input type="text" id="nombre" placeholder="Nombre" required />
-        </div>
+      <h2>Iniciar Sesión</h2>
+      <form id="formLogin" class="formulario">
         <div class="input-container">
           <i class="fas fa-envelope"></i>
           <input type="email" id="correo" placeholder="Correo electrónico" required />
@@ -43,10 +40,10 @@
           <i class="fas fa-lock"></i>
           <input type="password" id="password" placeholder="Contraseña" required />
         </div>
-        <button type="submit" class="boton">Registrarse</button>
+        <button type="submit" class="boton">Iniciar Sesión</button>
         <p id="mensaje" class="mensaje"></p>
       </form>
-      <p class="registro-link">¿Ya tienes cuenta? <a href="login.html">Inicia sesión</a></p>
+      <p class="registro-link">¿No tienes cuenta? <a href="registro.html">Regístrate</a></p>
     </section>
   </main>
 
@@ -55,54 +52,42 @@
   </footer>
 
   <script>
-    const form = document.getElementById("formRegistro");
+    const form = document.getElementById("formLogin");
     const mensaje = document.getElementById("mensaje");
 
-    // Función para mostrar mensajes de éxito o error
     function mostrarMensaje(texto, tipo) {
       mensaje.textContent = texto;
       mensaje.className = "mensaje " + (tipo === "success" ? "success" : "error");
     }
 
     form.addEventListener("submit", async (e) => {
-      e.preventDefault(); // Evitar el envío normal del formulario
-      mensaje.textContent = ""; // Limpiar el mensaje antes de nuevo intento
+      e.preventDefault();
+      mensaje.textContent = "";
 
-      const nombre = document.getElementById("nombre").value.trim();
       const correo = document.getElementById("correo").value.trim();
       const password = document.getElementById("password").value;
 
-      // Validación básica
-      if (!nombre || !correo || !password) {
-        mostrarMensaje("Todos los campos son obligatorios.", "error");
-        return;
-      }
-
       try {
-        // Enviar solicitud de registro a la API
-        const res = await fetch("http://localhost/tienda-boletos/public/api_usuarios.php?accion=registrar", {
+        const res = await fetch("http://localhost/tienda-boletos/public/api_usuarios.php?accion=login", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ nombre, correo, password })
+          body: JSON.stringify({ correo, password })
         });
 
         const data = await res.json();
+        console.log("Respuesta del backend:", data);
 
-        // Mostrar el mensaje de la respuesta de la API
         mostrarMensaje(data.message, data.success ? "success" : "error");
 
-        // Si el registro fue exitoso, redirigir al login
         if (data.success) {
           setTimeout(() => {
-            window.location.href = "login.html"; // Redirige al login después de 2 segundos
+            window.location.href = "index.html";
           }, 2000);
         }
       } catch (err) {
-        // Manejo de errores de red
         mostrarMensaje("Error de red: " + err.message, "error");
       }
     });
   </script>
 </body>
 </html>
-
