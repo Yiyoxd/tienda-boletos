@@ -1,4 +1,4 @@
--- BASE D DATOS DEL CINE
+-- BASE DE DATOS DEL CINE
 DROP DATABASE IF EXISTS cine;
 CREATE DATABASE cine;
 USE cine;
@@ -20,7 +20,7 @@ CREATE TABLE peliculas (
     duracion INT,
     clasificacion VARCHAR(10),
     imagen VARCHAR(255),
-    estado ENUM('activa','inactiva') DEFAULT 'activa'
+    estado ENUM('activa','inactiva', 'estreno') DEFAULT 'activa'
 );
 
 -- TABLA FUNCIONES
@@ -39,15 +39,24 @@ CREATE TABLE salas (
     nombre VARCHAR(50) NOT NULL UNIQUE  
 );
 
--- TABLA ASIENTOS
-CREATE TABLE asientos (
+-- TABLA SALA_FUNCION 
+CREATE TABLE sala_funcion (
     id INT AUTO_INCREMENT PRIMARY KEY,
     sala_id INT NOT NULL,
+    funcion_id INT NOT NULL,
+    FOREIGN KEY (sala_id) REFERENCES salas(id) ON DELETE CASCADE,
+    FOREIGN KEY (funcion_id) REFERENCES funciones(id) ON DELETE CASCADE
+);
+
+-- TABLA ASIENTOS 
+CREATE TABLE asientos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    sala_funcion_id INT NOT NULL,
     fila CHAR(1) NOT NULL,
     numero INT NOT NULL,
     estado ENUM('libre','reservado') DEFAULT 'libre',
-    UNIQUE(sala_id, fila, numero),
-    FOREIGN KEY (sala_id) REFERENCES salas(id) ON DELETE CASCADE
+    UNIQUE(sala_funcion_id, fila, numero),
+    FOREIGN KEY (sala_funcion_id) REFERENCES sala_funcion(id) ON DELETE CASCADE
 );
 
 -- TABLA RESERVAS
@@ -62,7 +71,7 @@ CREATE TABLE reservas (
     FOREIGN KEY (funcion_id) REFERENCES funciones(id) ON DELETE CASCADE
 );
 
--- TABLA DETALLE D RESERVA
+-- TABLA DETALLE DE RESERVA
 CREATE TABLE reserva_asientos (
     id INT AUTO_INCREMENT PRIMARY KEY,
     reserva_id INT NOT NULL,
@@ -81,14 +90,32 @@ CREATE TABLE pagos (
     FOREIGN KEY (reserva_id) REFERENCES reservas(id) ON DELETE CASCADE
 );
 
--- num d salas 
+-- PELICULAS EJEMPLO
+INSERT INTO peliculas (titulo, descripcion, duracion, clasificacion, imagen, estado) VALUES
+('Brokeback Mountain', 'Drama y romance en las montañas', 134, 'B15', 'mountain.jpg', 'activa'),
+('Titanic', 'Drama y romance en el océano', 195, 'B', 'titanic.jpg', 'estreno');
+
+-- FUNCIONES EJEMPLO
+INSERT INTO funciones (pelicula_id, fecha, hora, precio) VALUES
+(1, '2025-05-05', '18:00:00', 60.00),
+(1, '2025-05-06', '21:00:00', 65.00),
+(2, '2025-05-05', '19:30:00', 55.00);
+
+-- SALAS 
 INSERT INTO salas (nombre) VALUES
 ('Sala 1'), ('Sala 2'), ('Sala 3'), ('Sala 4'), ('Sala 5');
 
--- ASIENTOS DE 10FILAS (A-J) (20xFILA)
-INSERT INTO asientos (sala_id, fila, numero)
-SELECT s.id, f.fila, n.numero
-FROM salas AS s
+-- UNA RELACION DE LA SALAFUNCION
+INSERT INTO sala_funcion (sala_id, funcion_id) VALUES
+(1, 1),  -- Sala 1 con Funcion 1
+(1, 2),  
+(2, 3);  
+
+-- INSERTA ASIENTOS PARA LA FUNCION ESPECIFICA
+INSERT INTO asientos (sala_funcion_id, fila, numero)
+SELECT sf.id, f.fila, n.numero
+FROM sala_funcion AS sf
+JOIN salas AS s ON sf.sala_id = s.id
 CROSS JOIN (
   SELECT 'A' AS fila UNION ALL SELECT 'B' UNION ALL SELECT 'C' UNION ALL SELECT 'D'
   UNION ALL SELECT 'E' UNION ALL SELECT 'F' UNION ALL SELECT 'G' UNION ALL SELECT 'H'
@@ -102,33 +129,27 @@ CROSS JOIN (
   UNION ALL SELECT 17 UNION ALL SELECT 18 UNION ALL SELECT 19 UNION ALL SELECT 20
 ) AS n;
 
--- PRUEBA 
+-- USUARIOSPRUEBA
 INSERT INTO usuarios (nombre, email, password) VALUES
 ('Alfredo Palacios', 'yiyoxd@gmail.com', 'yiyostore'),
 ('Daniela Aldaco', 'daniald@gmail.com', 'checo123'),
 ('Sofia Gutierrez', 'sofiagtz@gmail.com', 'purin24');
 
-INSERT INTO peliculas (titulo, descripcion, duracion, clasificacion, imagen, estado) VALUES
-('Brokeback Mountain', 'Drama y romance en las montañas', 134, 'B15', 'mountain.jpg', 'activa'),
-('Titanic', 'Drama y romance en el oceano', 195, 'B', 'titanic.jpg', 'activa');
-
-INSERT INTO funciones (pelicula_id, fecha, hora, precio) VALUES
-(1,'2025-05-05','18:00:00',60.00),
-(1,'2025-05-06','21:00:00',65.00),
-(2,'2025-05-05','19:30:00',55.00);
-
 -- RESERVA Y ASIENTOS RESERVADOS
 INSERT INTO reservas (usuario_id, funcion_id, total, estado) VALUES
-(1,1,120.00,'pagado');
+(1, 1, 120.00, 'pagado');
 
+-- ASIENTOS RESERVADOS
 INSERT INTO reserva_asientos (reserva_id, asiento_id) VALUES
-(1, (SELECT id FROM asientos WHERE sala_id=1 AND fila='A' AND numero=1)),
-(1, (SELECT id FROM asientos WHERE sala_id=1 AND fila='A' AND numero=2));
+(1, (SELECT id FROM asientos WHERE sala_funcion_id = 1 AND fila = 'A' AND numero = 1)),
+(1, (SELECT id FROM asientos WHERE sala_funcion_id = 1 AND fila = 'A' AND numero = 2));
 
--- UPDATE D LOS ASIENTOS
-UPDATE asientos SET estado='reservado' WHERE sala_id=1 AND fila='A' AND numero IN (1,2);
+-- ACTIALIZACION DEL ESTADO
+UPDATE asientos SET estado = 'reservado' WHERE sala_funcion_id = 1 AND fila = 'A' AND numero IN (1, 2);
 
+-- VERIFICA LOS ASIENTOS
 SELECT s.nombre AS sala, a.fila, a.numero, a.estado
 FROM salas s
-JOIN asientos a ON s.id = a.sala_id
-WHERE s.id = 1;  
+JOIN sala_funcion sf ON s.id = sf.sala_id
+JOIN asientos a ON sf.id = a.sala_funcion_id
+WHERE s.id = 1;
