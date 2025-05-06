@@ -378,30 +378,12 @@ h3 {
 
 /* ===== FOOTER GENERAL ===== */
 .footer {
-    position: relative;
-    z-index: 3;
     text-align: center;
     padding: 2rem;
     background-color: var(--negro);
     color: var(--blanco);
     margin-top: 0rem;
 }
-
-
-.pelicula-flex {
-    display: flex;
-    gap: 2rem;
-    background-color: var(--blanco);
-    padding: 2rem;
-    margin-bottom: 2.5rem;
-    border-radius: 1rem;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    align-items: flex-start; 
-    flex-wrap: wrap;
-    min-height: 240px; 
-}
-
-
 
   .titulo-cartelera {
     font-family: 'Bebas Neue', cursive;
@@ -418,44 +400,6 @@ h3 {
     color: var(--blanco);
 }
 
-  
-  .pelicula-imagen img {
-    width: 180px;
-    height: auto;
-    border-radius: 1rem;
-  }
-  
-  .pelicula-info h3 {
-    font-size: 3rem;
-    color: var(--secundario);
-    margin-top: 6rem;
-    text-align: left;
-    font-family: 'Arial', serif;
-}
-
-  
-  .pelicula-info p {
-    margin: 0.5rem 0;
-    font-size: 1.6rem;
-    color: var(--negro);
-    padding-bottom: 1rem;
-  }
-  
-  .horarios button {
-    background-color: var(--azul);
-    color: var(--blanco);
-    border: none;
-    padding: 0.6rem 1.2rem;
-    margin: 0.3rem;
-    font-size: 1.4rem;
-    border-radius: 0.5rem;
-    cursor: pointer;
-  }
-  
-  .horarios button:hover {
-    background-color: var(--rojoAlto);
-  }
-  
   .encabezado-cartelera {
     background-color: var(--azul);
     padding: 3rem 2rem 1.5rem 2rem; 
@@ -467,6 +411,87 @@ h3 {
 }
 
 
+  .pelicula-flex {
+    display: flex;
+    gap: 2rem;
+    background-color: var(--blanco);
+    padding: 2rem;
+    margin-bottom: 2.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    align-items: center; /* CENTRA verticalmente */
+}
+
+.pelicula-imagen {
+    flex-shrink: 0;
+}
+
+.pelicula-imagen img {
+    width: 180px;
+    height: auto;
+    border-radius: 1rem;
+    object-fit: contain;
+}
+
+.pelicula-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+}
+
+.pelicula-info h3 {
+    font-size: 3rem;
+    color: var(--secundario);
+    margin: 0 0 1rem 0;
+    text-align: left;
+    font-family: 'Bebas Neue', cursive;
+}
+
+.pelicula-info p {
+    font-size: 1.6rem;
+    color: var(--negro);
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+.horarios {
+    margin-top: 1rem;
+}
+
+.horarios button {
+    background-color: var(--azul);
+    color: var(--blanco);
+    border: none;
+    padding: 0.6rem 1.2rem;
+    margin: 0.3rem;
+    font-size: 1.4rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+.horarios button:hover {
+    background-color: var(--rojoAlto);
+}
+
+@media (max-width: 768px) {
+    .pelicula-flex {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .pelicula-info h3, .pelicula-info p {
+        text-align: center;
+    }
+
+    .pelicula-imagen img {
+        width: 100%;
+        max-width: 220px;
+    }
+}
+
+  
   @media (max-width: 768px) {
     .pelicula-flex {
       flex-direction: column;
@@ -488,6 +513,8 @@ h3 {
       text-align: center;
     }
   }
+
+
   /* ===== LOGIN ESTILO PERSONALIZADO ===== */
 .login {
     background-color: #fff;
