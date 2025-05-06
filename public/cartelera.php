@@ -29,8 +29,8 @@ $peliculas = $conexion->query("SELECT * FROM peliculas WHERE estado = 'activa'")
             </div>
             <div class="nav-derecha">
                 <a href="index.php#contacto">Contacto</a>
-                <a href="#">Login</a>
-                <a href="#" class="boton-registro">Registro</a>
+                <a href="login.html">Login</a>
+                <a href="registro.html" class="boton-registro">Registro</a>
             </div>
         </nav>
     </div>
