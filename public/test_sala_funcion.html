@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Probar Sala-Función</title>
+  <style>
+    body { font-family: Arial; padding: 2rem; background-color: #f4f4f4; }
+    input { padding: 8px; width: 100%; margin-bottom: 1rem; }
+    button { padding: 10px; width: 32%; margin-right: 1%; cursor: pointer; }
+    .resultado { margin-top: 1rem; white-space: pre-wrap; background: #eee; padding: 10px; border-radius: 5px; }
+  </style>
+</head>
+<body>
+
+<h2>Sala-Función</h2>
+<input type="number" id="sala_id" placeholder="ID Sala">
+<input type="number" id="funcion_id" placeholder="ID Función">
+<input type="number" id="buscar_id" placeholder="ID a buscar">
+
+<div>
+  <button onclick="registrar()">Registrar</button>
+  <button onclick="obtener()">Obtener</button>
+  <button onclick="listar()">Listar</button>
+</div>
+
+<div class="resultado" id="resultado"></div>
+
+<script>
+const r = document.getElementById("resultado");
+
+function mostrar(data) {
+  r.textContent = typeof data === "string" ? data : JSON.stringify(data, null, 2);
+}
+
+async function registrar() {
+  const body = {
+    sala_id: parseInt(document.getElementById("sala_id").value),
+    funcion_id: parseInt(document.getElementById("funcion_id").value)
+  };
+
+  const res = await fetch("http://localhost/tienda-boletos/public/api_sala_funcion.php?accion=registrar", {
+    method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body)
+  });
+  const data = await res.json();
+  mostrar(data);
+}
+
+async function obtener() {
+  const id = parseInt(document.getElementById("buscar_id").value);
+  const res = await fetch("http://localhost/tienda-boletos/public/api_sala_funcion.php?accion=obtener", {
+    method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ id })
+  });
+  const data = await res.json();
+  mostrar(data);
+}
+
+async function listar() {
+  const res = await fetch("http://localhost/tienda-boletos/public/api_sala_funcion.php?accion=listar");
+  const data = await res.json();
+  mostrar(data);
+}
+</script>
+</body>
+</html>

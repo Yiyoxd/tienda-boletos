@@ -3,7 +3,6 @@ require_once __DIR__ ."/../../core/Conexion.php";
 require_once __DIR__ ."/../../core/Consultas.php";
 
 class Pelicula {
-
     public static function registrar($titulo, $descripcion, $duracion, $clasificacion, $imagen, $estado = "activa") {
         $stmt = Consultas::ejecutar(
             "INSERT INTO peliculas (titulo, descripcion, duracion, clasificacion, imagen, estado)
@@ -28,7 +27,7 @@ class Pelicula {
         if ($stmt->num_rows === 0) {
             $stmt->free_result();
             $stmt->close();
-            return null;
+            return [];
         }
 
         $stmt->bind_result($id, $titulo, $descripcion, $duracion, $clasificacion, $imagen, $estado);
