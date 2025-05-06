@@ -23,12 +23,12 @@ $peliculas = $conexion->query("SELECT * FROM peliculas WHERE estado = 'activa'")
         <nav class="navegacion-principal contenedor">
             <div class="nav-izquierda">
                 <div class="logo"><a href="index.html">C I N E T I X</a></div>
-                <a href="index.html">Inicio</a>
-                <a href="index.html#quienes">Quiénes somos</a>
+                <a href="index.php">Inicio</a>
+                <a href="index.php#quienes">Quiénes somos</a>
                 <a href="#">Catálogo</a>
             </div>
             <div class="nav-derecha">
-                <a href="index.html#contacto">Contacto</a>
+                <a href="index.php#contacto">Contacto</a>
                 <a href="#">Login</a>
                 <a href="#" class="boton-registro">Registro</a>
             </div>

@@ -25,7 +25,7 @@
             <a href="#">Inicio</a>
             <a href="#quienes">Quiénes somos</a>
 
-            <a href="cartelera.html">Catálogo</a>
+            <a href="cartelera.php">Catálogo</a>
           </div>
       
           <div class="nav-derecha">
@@ -35,14 +35,19 @@
           </div>
         </nav>
       </div>
-      
-    <section class="hero">
-        <div class="contenido-hero">
-            <h2>"Ya no quiero vivir en un agujero"</h2>
-            <p>- Mr. Fox</p>
-            <a class="boton" href="#">Consultar Cartelera</a>
+
+      <section class="hero">
+        <div class="contenido-hero contenedor-carousel">
+          <button class="atras">❮</button>
+          <img class="imagen-hero" src="img/banner/todoEn.jpg" alt="Frase">
+          <div class="texto-hero">
+            <h2 class="frase">"En otra vida, me habría gustado lavar la ropa y hacer los impuestos contigo."</h2>
+            <p class="autor">- Everything Everywhere All at Once (2022)</p>
+            <a class="boton" href="cartelera.php">Consultar Cartelera</a>
+          </div>
+          <button class="adelante">❯</button>
         </div>
-    </section>
+      </section>
 
     <main class="contenedor sombra">
         <!-- CAMBIO: Sección de estrenos -->
@@ -111,5 +116,6 @@
     <footer class="footer">
         <p>Todos los derechos reservados. Cinetix 2025</p>
     </footer>
+    <script src="js/carrusel.js"></script>
 </body>
 </html>
