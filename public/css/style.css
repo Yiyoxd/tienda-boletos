@@ -385,7 +385,6 @@ h3 {
     margin-top: 0rem;
 }
 
-
   .titulo-cartelera {
     font-family: 'Bebas Neue', cursive;
     font-size: 6rem;
@@ -401,7 +400,6 @@ h3 {
     color: var(--blanco);
 }
 
-  
   .encabezado-cartelera {
     background-color: var(--azul);
     padding: 3rem 2rem 1.5rem 2rem; 
@@ -494,8 +492,157 @@ h3 {
 }
 
   
+  @media (max-width: 768px) {
+    .pelicula-flex {
+      flex-direction: column;
+      text-align: center;
+      align-items: center;
+    }
   
+    .pelicula-imagen img {
+      width: 100%;
+      max-width: 250px;
+      height: auto;
+    }
+  
+    .pelicula-info {
+      width: 100%;
+    }
+  
+    .pelicula-info h3 {
+      text-align: center;
+    }
+  }
 
-  
+
+  /* ===== LOGIN ESTILO PERSONALIZADO ===== */
+.login {
+    background-color: #fff;
+    padding: 4rem 3rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    max-width: 500px;
+    margin: 5rem auto;
+    text-align: center;
+    position: relative; 
+    z-index: 2; /* Asegura que el formulario esté por encima del overlay */
+}
+
+.login h2 {
+    font-size: 3rem;
+    color: var(--secundario);
+    margin-bottom: 2rem;
+}
+
+.formulario input {
+    width: 100%;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--grisClaro);
+    font-size: 1.6rem;
+    background-color: #f9f9f9;
+}
+
+.formulario input:focus {
+    outline: none;
+    border-color: var(--secundario);
+    box-shadow: 0 0 5px rgba(74, 4, 4, 0.3);
+}
+
+.formulario .boton {
+    width: 100%;
+    padding: 1.5rem;
+    font-size: 1.8rem;
+}
+
+.mensaje {
+    margin-top: 1rem;
+    font-size: 1.4rem;
+}
+
+.mensaje.success {
+    color: green;
+}
+
+.mensaje.error {
+    color: red;
+}
+
+/* ===== ESTILO DE ICONOS Y CAMPOS DE TEXTO ===== */
+.input-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    border: 1px solid var(--grisClaro);
+    background-color: #f9f9f9;
+}
+
+.input-container i {
+    color: var(--gris);
+    margin-right: 1rem;  
+}
+
+.input-container input {
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 1rem;
+    font-size: 1.6rem;
+    background-color: #f9f9f9;
+}
+
+.input-container input:focus {
+    border-color: var(--secundario);
+    box-shadow: 0 0 5px rgba(178, 34, 34, 0.3);
+}
+
+.nombre-cine {
+    color: white;
+    font-size: 2.8rem;
+    font-weight: 700;
+    font-family: 'Krub', sans-serif;
+    text-transform: uppercase;
+    line-height: 1;
+}
+
+.eslogan {
+    color:#FFD700;
+    display: block;
+    font-size: 1.4rem;
+    font-weight: 400;
+    text-transform: none;
+    margin-top: 0.3rem;
+    font-weight: bold;
+}
+
+.registro-link a {
+    color: rgb(159, 38, 24);
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Opacidad ajustable */
+    z-index: 1; /* Asegura que el overlay esté debajo del formulario */
+}
+
+.login-body {
+    position: relative;
+    background-image: url("../img/cinepic.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: 100vh; 
+    z-index: 0; 
+}
 
   
