@@ -1,5 +1,4 @@
 <?php
-// Conexión a la base de datos
 $conexion = new mysqli("localhost", "root", "", "cine");
 $conexion->set_charset("utf8");
 
@@ -11,12 +10,10 @@ $peliculas = $conexion->query("SELECT * FROM peliculas WHERE estado = 'activa'")
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cinetix</title>
-    <link rel="preload" href="css/normalize.css" as="style">
     <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Krub:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-    <link rel="preload" href="css/style.css" as="style">
-    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div class="nav-bg">
@@ -48,18 +45,14 @@ $peliculas = $conexion->query("SELECT * FROM peliculas WHERE estado = 'activa'")
                         <img src="img/<?= htmlspecialchars($peli['imagen']) ?>" alt="<?= htmlspecialchars($peli['titulo']) ?>">
                     </div>
                     <div class="pelicula-info">
-                    <h3><?= htmlspecialchars($peli['titulo']) ?></h3>
-                    <p>Clasificación: <?= htmlspecialchars($peli['clasificacion']) ?></p>
-                    <p>Duración: <?= htmlspecialchars($peli['duracion']) ?> minutos</p>
-                    <p><?= htmlspecialchars($peli['descripcion']) ?></p>
-                    <div class="horarios">
-                        <button>12:00</button>
-                        <button>15:00</button>
-                        <button>18:00</button>
-                        <button>21:00</button>
+                        <h3><?= htmlspecialchars($peli['titulo']) ?></h3>
+                        <p>Clasificación: <?= htmlspecialchars($peli['clasificacion']) ?></p>
+                        <p>Duración: <?= htmlspecialchars($peli['duracion']) ?> minutos</p>
+                        <p><?= htmlspecialchars($peli['descripcion']) ?></p>
+                        <div class="horarios" id="horarios-<?= $peli['id'] ?>">
+                            <p>Cargando horarios...</p>
+                        </div>
                     </div>
-                </div>
-
                 </div>
             <?php endwhile; ?>
         </section>
@@ -68,5 +61,40 @@ $peliculas = $conexion->query("SELECT * FROM peliculas WHERE estado = 'activa'")
     <footer class="footer">
         <p>Todos los derechos reservados. Cinetix 2025</p>
     </footer>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll(".pelicula-flex").forEach(pelicula => {
+            const peliculaId = pelicula.querySelector(".horarios").id.split("-")[1];
+            const horariosDiv = document.getElementById("horarios-" + peliculaId);
+
+            fetch("api_funciones.php?accion=por_pelicula", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ pelicula_id: parseInt(peliculaId) })
+            })
+            .then(res => res.json())
+            .then(data => {
+                horariosDiv.innerHTML = "";
+                if (data.success && Array.isArray(data.data)) {
+                    data.data.forEach(funcion => {
+                        const btn = document.createElement("button");
+                        btn.textContent = funcion.hora.slice(0, 5); // solo HH:MM
+                        btn.onclick = () => {
+                            window.location.href = 'procesar_reserva.php?funcion_id=${funcion.id}';
+                        };
+                        horariosDiv.appendChild(btn);
+                    });
+                } else {
+                    horariosDiv.innerHTML = "<p>Sin horarios disponibles</p>";
+                }
+            })
+            .catch(err => {
+                console.error("Error al cargar funciones:", err);
+                horariosDiv.innerHTML = "<p>Error al cargar horarios</p>";
+            });
+        });
+    });
+    </script>
 </body>
 </html>
