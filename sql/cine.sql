@@ -153,3 +153,43 @@ FROM salas s
 JOIN sala_funcion sf ON s.id = sf.sala_id
 JOIN asientos a ON sf.id = a.sala_funcion_id
 WHERE s.id = 1;
+
+--INSERTAR PELIS
+INSERT INTO peliculas (titulo, descripcion, duracion, clasificacion, imagen, estado) VALUES
+('Emma.', 'Emma Woodhouse, una joven bien intencionada pero con tendencias entrometidas, se enreda en los asuntos amorosos de sus amigos.', 124, 'B', 'emma.jpg', 'activa'),
+('El Gran Castillo Vagabundo', '"El Castillo Vagabundo" (Howl\s Moving Castle) es una película de fantasía dirigida por Hayao Miyazaki.', 119, 'A', 'elCastillo.webp', 'activa'),
+('Isla De Perros', '"Isla de Perros", dirigida por Wes Anderson, es una historia animada sobre un niño en busca de su perro en una isla de perros exiliados.', 101, 'B', 'isla.jpg', 'activa'),
+('Duna: Parte Dos', 'La película sigue a Paul Atreides mientras se une a los Fremen y busca venganza contra quienes destruyeron a su familia.', 166, 'B15', 'duna.jpg', 'activa');
+
+--INSERTAR HORARIOS
+-- EMMA 
+INSERT INTO funciones (pelicula_id, fecha, hora, precio) VALUES
+(3, '2025-05-11', '11:00', 55.00),
+(3, '2025-05-11', '13:15', 55.00),
+(3, '2025-05-11', '15:30', 55.00),
+(3, '2025-05-11', '17:45', 55.00),
+(3, '2025-05-11', '20:00', 55.00);
+
+-- EL GRAN CASTILLO VAGABUNDO 
+INSERT INTO funciones (pelicula_id, fecha, hora, precio) VALUES
+(4, '2025-05-11', '10:00', 55.00),
+(4, '2025-05-11', '12:00', 55.00),
+(4, '2025-05-11', '14:00', 55.00),
+(4, '2025-05-11', '16:00', 55.00),
+(4, '2025-05-11', '18:00', 55.00),
+(4, '2025-05-11', '20:00', 55.00);
+
+-- ISLA DE PERROS
+INSERT INTO funciones (pelicula_id, fecha, hora, precio) VALUES
+(5, '2025-05-11', '11:30', 55.00),
+(5, '2025-05-11', '13:30', 55.00),
+(5, '2025-05-11', '15:30', 55.00),
+(5, '2025-05-11', '17:30', 55.00),
+(5, '2025-05-11', '19:30', 55.00);
+
+-- DUNA: PARTE DOS
+INSERT INTO funciones (pelicula_id, fecha, hora, precio) VALUES
+(6, '2025-05-11', '12:00', 55.00),
+(6, '2025-05-11', '15:00', 55.00),
+(6, '2025-05-11', '18:00', 55.00),
+(6, '2025-05-11', '21:00', 55.00);

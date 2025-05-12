@@ -429,6 +429,7 @@ h3 {
     margin-top: 0rem;
 }
 
+/* ===== CARTELERA ===== */
   .titulo-cartelera {
     font-family: 'Bebas Neue', cursive;
     font-size: 6rem;
@@ -558,6 +559,193 @@ h3 {
     }
   }
 
+ /* ========= RESERVA ========== */
+.contenedor-reserva {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 1rem auto;
+    padding: 2rem;
+    flex-wrap: wrap;
+}
+
+.asientos {
+    flex: 7;
+    background-color: var(--blanco);
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.colores_boleto {
+    background-color: var(--grisClaro);
+    color: var(--negro);
+    padding: 1rem;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 6px;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+    font-size: 1.4rem;
+}
+
+.colores_boleto span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.cuadro {
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    display: inline-block;
+    border: 1px solid #999;
+}
+
+.pantalla {
+    background-color: var(--azul);
+    color: var(--blanco);
+    padding: 0.5rem;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 6px;
+    margin-bottom: 2rem;
+}
+
+.fila {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.fila::before {
+    content: attr(data-fila);
+    font-weight: bold;
+    width: 1.5rem;
+    display: inline-block;
+    margin-right: 0.5rem;
+    color: var(--secundario);
+}
+
+.fila button {
+    width: 35px;
+    height: 35px;
+    margin: 2px;
+    border-radius: 5px;
+    border: 1px solid var(--grisClaro);
+    background-color: var(--blanco);
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button.disponible {
+    background-color: var(--blanco);
+    color: #222;
+}
+
+button.seleccionado {
+    background-color: var(--primario);
+    color: black;
+    border: 2px solid var(--primario);
+}
+
+button.ocupado {
+    background-color: var(--gris);
+    color: var(--blanco);
+    cursor: not-allowed;
+}
+
+.resumen {
+    flex: 3;
+    background-color: var(--blanco);
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.resumen img {
+    width: 100%;
+    max-height: 200px;
+    border-radius: 1rem;
+    object-fit: contain;
+}
+
+.resumen h3 {
+    font-family: 'Bebas Neue', cursive;
+    color: var(--secundario);
+    margin-bottom: 1rem;
+    font-size: 2.4rem;
+}
+
+.resumen p {
+    font-size: 1.6rem;
+    margin: 0.5rem 0;
+}
+
+.resumen .total {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-top: 1rem;
+}
+
+.resumen button {
+    margin-top: 2rem;
+    width: 100%;
+    padding: 1rem;
+    background-color: var(--secundario);
+    color: var(--blanco);
+    font-size: 1.5rem;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+}
+
+.resumen button:hover {
+    background-color: var(--rojoAlto);
+    color: var(--primario);
+}
+
+.leyenda-asientos {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #333;
+    flex-wrap: wrap;
+}
+
+.leyenda-asientos span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.leyenda-asientos .color-muestra {
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    display: inline-block;
+    border: 1px solid var(--gris);
+}
+
+.color-disponible {
+    background-color: var(--blanco);
+}
+.color-seleccionado {
+    background-color: var(--primario);
+}
+.color-ocupado {
+    background-color: var(--gris);
+}
 
   /* ===== LOGIN ESTILO PERSONALIZADO ===== */
 .login {
