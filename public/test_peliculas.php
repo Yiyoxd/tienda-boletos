@@ -105,7 +105,7 @@
       };
 
       try {
-        const res = await fetch("http://localhost/tienda-boletos/public/api_peliculas.php?accion=registrar", {
+        const res = await fetch("api_peliculas.php?accion=registrar", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload)
@@ -122,7 +122,7 @@
       if (!id) return mostrarMensaje("Ingresa un ID válido", "error");
 
       try {
-        const res = await fetch("http://localhost/tienda-boletos/public/api_peliculas.php?accion=obtener", {
+        const res = await fetch("api_peliculas.php?accion=obtener", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ id })
@@ -136,7 +136,7 @@
 
     async function listar() {
       try {
-        const res = await fetch("http://localhost/tienda-boletos/public/api_peliculas.php?accion=listar");
+        const res = await fetch("api_peliculas.php?accion=listar");
         const data = await res.json();
         mostrarMensaje(data.data || data.message, data.success ? "success" : "error");
       } catch (err) {

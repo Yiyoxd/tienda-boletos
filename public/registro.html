@@ -80,7 +80,7 @@
 
       try {
         // Enviar solicitud de registro a la API
-        const res = await fetch("http://localhost/tienda-boletos/public/api_usuarios.php?accion=registrar", {
+        const res = await fetch("api_usuarios.php?accion=registrar", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ nombre, correo, password })

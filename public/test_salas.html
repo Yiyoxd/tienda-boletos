@@ -93,7 +93,7 @@
       if (!nombre) return mostrarMensaje("El nombre es obligatorio", "error");
 
       try {
-        const res = await fetch("http://localhost/tienda-boletos/public/api_salas.php?accion=registrar", {
+        const res = await fetch("api_salas.php?accion=registrar", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ nombre })
@@ -110,7 +110,7 @@
       if (!id) return mostrarMensaje("Ingresa un ID válido", "error");
 
       try {
-        const res = await fetch("http://localhost/tienda-boletos/public/api_salas.php?accion=obtener", {
+        const res = await fetch("api_salas.php?accion=obtener", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ id })
@@ -124,13 +124,14 @@
 
     async function listar() {
       try {
-        const res = await fetch("http://localhost/tienda-boletos/public/api_salas.php?accion=listar");
+        const res = await fetch("api_salas.php?accion=listar");
         const data = await res.json();
         mostrarMensaje(data.data || data.message, data.success ? "success" : "error");
       } catch (err) {
         mostrarMensaje("Error de red: " + err.message, "error");
       }
     }
+
   </script>
 
 </body>
