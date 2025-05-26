@@ -38,7 +38,7 @@ async function registrar() {
     funcion_id: parseInt(document.getElementById("funcion_id").value)
   };
 
-  const res = await fetch("http://localhost/tienda-boletos/public/api_sala_funcion.php?accion=registrar", {
+  const res = await fetch("api_sala_funcion.php?accion=registrar", {
     method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body)
   });
   const data = await res.json();
@@ -47,7 +47,7 @@ async function registrar() {
 
 async function obtener() {
   const id = parseInt(document.getElementById("buscar_id").value);
-  const res = await fetch("http://localhost/tienda-boletos/public/api_sala_funcion.php?accion=obtener", {
+  const res = await fetch("api_sala_funcion.php?accion=obtener", {
     method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ id })
   });
   const data = await res.json();
@@ -55,7 +55,7 @@ async function obtener() {
 }
 
 async function listar() {
-  const res = await fetch("http://localhost/tienda-boletos/public/api_sala_funcion.php?accion=listar");
+  const res = await fetch("api_sala_funcion.php?accion=listar");
   const data = await res.json();
   mostrar(data);
 }
