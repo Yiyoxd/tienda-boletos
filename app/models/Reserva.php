@@ -15,14 +15,16 @@ class Reserva {
         $cx = Conexion::getConexion();
         $cx->begin_transaction();
 
-        /* 1.- Obtener funcion_id y precio de la función */
+       /* 1.- Obtener funcion_id y precio de la función */
         $q = Consultas::ejecutar(
             "SELECT f.id, f.precio
-               FROM sala_funcion sf
-               JOIN funciones f ON sf.funcion_id = f.id
-              WHERE sf.id = ? FOR SHARE",
-            "i", [$sala_funcion_id]
+            FROM sala_funcion sf
+            JOIN funciones f ON sf.funcion_id = f.id
+            WHERE sf.id = ? LOCK IN SHARE MODE",
+            "i",
+            [$sala_funcion_id]
         );
+
         $q->bind_result($funcion_id, $precio_unit);
         if (!$q->fetch()) { $cx->rollback(); return false; }
         $q->close();
