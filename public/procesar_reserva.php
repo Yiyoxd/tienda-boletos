@@ -123,7 +123,16 @@ if ($sala_funcion_id <= 0) { die('Sala-Función no especificada'); }
 
         const cont = document.querySelector('.asientos');
         for (const f of 'ABCDEFGHIJ') {
-            const fila = document.createElement('div'); fila.className = 'fila';
+            const fila = document.createElement('div');
+            fila.className = 'fila';
+
+            // 🔸 Agrega esto:
+            const etiqueta = document.createElement('span');
+            etiqueta.className = 'fila-label';
+            etiqueta.textContent = f;
+            fila.appendChild(etiqueta);
+
+            // resto del código original sigue exactamente igual
             for (let n = 1; n <= 20; n++) {
                 const est = (mapa[f]?.[n]) || 'libre';
                 const btn = document.createElement('button');
