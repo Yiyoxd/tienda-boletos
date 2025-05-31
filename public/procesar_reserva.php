@@ -109,7 +109,7 @@ if ($sala_funcion_id <= 0) { die('Sala-Función no especificada'); }
 
     /* Cargar asientos */
     (async () => {
-        const j = await (await fetch('api_asientos.php?accion=listar', {
+            const j = await (await fetch('api_asientos.php?accion=listar', {
             method:'POST', headers:{'Content-Type':'application/json'},
             body:JSON.stringify({sala_funcion_id:salaFuncionId})
         })).json();
@@ -203,6 +203,33 @@ if ($sala_funcion_id <= 0) { die('Sala-Función no especificada'); }
             const rjson = await reserva.json();
             if (rjson.success) {
                 localStorage.setItem('mensaje_pago', '¡Reserva y pago completados!');
+
+                // Arma los datos para el boleto PDF
+                const datosBoleto = {
+                    cineNombre: "Cinetix Universidad",
+                    cineID: 1256,
+                    pelicula: pelicula.titulo,
+                    fecha: document.getElementById('fecha-funcion').textContent,
+                    hora: document.getElementById('hora-funcion').textContent,
+                    cantidad: asientosSeleccionados().length,
+                    asientos: asientosSeleccionados().map(a => `${a.fila}${a.numero}`).join(', '),
+                    sala: document.getElementById('sala-id').textContent,
+                    total: parseFloat(document.getElementById('total').textContent),
+                    transaccion: j.id_transaccion ?? Math.floor(Math.random() * 1000000),
+                    metodoPago: j.metodo_pago,
+                    imagenPelicula: 'img/' + pelicula.imagen
+                };  
+
+                // 👉 Codificamos los datos como string para pasarlos por GET
+                const urlPDF = new URL('generar_recibo.php', window.location.href);
+                urlPDF.searchParams.set('json', encodeURIComponent(JSON.stringify(datosBoleto)));
+                
+                const a = document.createElement('a');
+                a.href = urlPDF.toString();
+                a.download = 'boleto_cinetix.pdf';
+                a.click();
+
+                // 🔁 Redirigimos al resumen
                 location.href = `procesar_reserva.php?funcion_id=${salaFuncionId}`;
             } else {
                 alert('Pago realizado, pero la reserva falló: ' + (rjson.message || ''));

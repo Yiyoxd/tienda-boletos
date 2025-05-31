@@ -39,8 +39,31 @@ class PaypalService {
     }
 
     public function capturarOrden($orderID) {
-        return $this->request("/v2/checkout/orders/$orderID/capture", 'POST');
+        $respuesta = $this->request("/v2/checkout/orders/$orderID/capture", 'POST');
+
+        $metodoPago = 'PayPal';
+        $marca = '';
+        $ultimos = '';
+        if (isset($respuesta['purchase_units'][0]['payments']['captures'][0]['payment_source']['card'])) {
+            $card = $respuesta['purchase_units'][0]['payments']['captures'][0]['payment_source']['card'];
+            $marca = $card['brand'] ?? '';
+            $ultimos = $card['last_digits'] ?? '';
+            $metodoPago = "Tarjeta $marca ****$ultimos";
+        }
+
+        $nombre = ($respuesta['payer']['name']['given_name'] ?? '') . ' ' . ($respuesta['payer']['name']['surname'] ?? '');
+        $correo = $respuesta['payer']['email_address'] ?? '';
+
+        return [
+            'status' => $respuesta['status'] ?? 'UNKNOWN',
+            'id_transaccion' => $respuesta['id'] ?? '',
+            'metodo_pago' => $metodoPago,
+            'nombre' => $nombre,
+            'correo' => $correo
+        ];
     }
+
+
 
     private function request($endpoint, $method, $body = null) {
         $context = [
