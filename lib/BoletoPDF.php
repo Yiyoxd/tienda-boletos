@@ -24,6 +24,7 @@ class GeneradorBoletoPDF
     public function generar(array $d): FPDF
     {
         $this->encabezado($d);
+        $this->pdf->Ln(4);
         $this->lineaPunteada();
         $this->bloquePelicula($d);
         $this->lineaPunteada();
@@ -56,34 +57,94 @@ class GeneradorBoletoPDF
     }
 
     private function bloquePelicula(array $d)
-    {
-        extract($d); // $pelicula, $imagenPelicula, $cineNombre, etc.
+{
+    extract($d); // $pelicula, $imagenPelicula, $cineNombre, etc.
 
-        $this->pdf->SetFont('Arial','B',9);
-        $this->pdf->Cell(0,5,$this->t('PELÍCULA'),0,1,'C');
+    $this->pdf->SetFont('Arial','B',9);
+    $this->pdf->Cell(0,5,$this->t('PELÍCULA'),0,1,'C');
+    $this->pdf->Ln(1);
 
-        /* Imagen cartel */
-        $x = $this->pdf->GetX();
-        $y = $this->pdf->GetY();
-        if (is_file($imagenPelicula)) {
-            $this->pdf->Image($imagenPelicula, $x, $y, 22, 0);   // mantiene proporción
+   $y = $this->pdf->GetY();
+    $anchoImagen = 22;
+    $altoImagen = 30;   
+    $x = self::MARGIN + 1; 
+
+    if (is_file($imagenPelicula)) {
+    $this->pdf->Image($imagenPelicula, $x, $y, $anchoImagen, $altoImagen);
+}
+
+    // Detalles
+    $textoX = $x + 24;
+    $this->pdf->SetXY($textoX, $y);
+
+    $this->pdf->SetFont('Arial','B',9);
+    $this->pdf->MultiCell(self::ANCHO - $textoX - self::MARGIN, 4, $this->t($pelicula));
+
+    $this->pdf->SetFont('Arial','',8);
+    $this->pdf->SetX($textoX);
+    $this->pdf->MultiCell(self::ANCHO - $textoX - self::MARGIN, 4, $this->t("$cineNombre\n$fecha $hora"));
+
+    // Datos: Boletos / Asientos / Sala
+    $this->pdf->SetX($textoX);
+    $this->pdf->Cell(25,4,$this->t("Boletos:"),0,0,'L');
+    $this->pdf->Cell(0 ,4,$this->t($cantidad),0,1,'L');
+
+    // Asientos lim de 2lineas
+    $this->pdf->SetX($textoX);
+    $this->pdf->SetFont('Arial','',8);
+    $this->pdf->Cell(25,4,$this->t("Asientos:"),0,0,'L');
+
+    $asientosX = $this->pdf->GetX();
+    $asientosY = $this->pdf->GetY();
+
+    //bold en los asientoss 
+    $this->pdf->SetFont('Arial','B',8);
+    $this->pdf->SetTextColor(0,0,200); 
+
+    // divide los asientos para q no se pase de 2 lineas
+    $asientosArray = explode(',', $asientos);
+    $linea1 = '';
+    $linea2 = '';
+    $anchoMax = self::ANCHO - $asientosX - self::MARGIN;
+    $this->pdf->SetXY($asientosX, $asientosY);
+
+    // 1era y 2da linea
+    foreach ($asientosArray as $a) {
+    $try1 = trim($linea1 . ($linea1 ? ', ' : '') . $a);
+    $w1 = $this->pdf->GetStringWidth($try1);
+    if ($w1 <= $anchoMax) {
+        $linea1 = $try1;
+    } else {
+        $try2 = trim($linea2 . ($linea2 ? ', ' : '') . $a);
+        $w2 = $this->pdf->GetStringWidth($try2);
+        if ($w2 <= $anchoMax) {
+            $linea2 = $try2;
+        } else {
+            $linea2 .= ', ...'; // Si se pasa corta
+            break;
         }
-
-        /* Detalles a la derecha de la imagen */
-        $this->pdf->SetXY($x+24,$y);
-        $this->pdf->SetFont('Arial','B',9);
-        $this->pdf->MultiCell( self::ANCHO - 24 - self::MARGIN,4, $this->t($pelicula) );
-
-        $this->pdf->SetFont('Arial','',8);
-        $this->pdf->SetXY($x+24,$this->pdf->GetY()+1);
-        $this->pdf->MultiCell(0,4,$this->t("$cineNombre\n$fecha $hora"));
-
-        /* Asientos, sala, cantidad */
-        $this->pdf->Ln(1);
-        $this->parLabelDato('Boletos',   $cantidad);
-        $this->parLabelDato('Asientos',  $asientos);
-        $this->parLabelDato('Sala',      $sala);
     }
+}
+
+// Mostrar linea 1 y 2 (si hay)
+$this->pdf->MultiCell($anchoMax, 4, $this->t($linea1), 0, 'L');
+if ($linea2) {
+    $this->pdf->SetX($asientosX);
+    $this->pdf->MultiCell($anchoMax, 4, $this->t($linea2), 0, 'L');
+}
+
+// restaura fuente y color
+$this->pdf->SetFont('Arial','',8);
+$this->pdf->SetTextColor(0,0,0);
+
+// Sala (se mueve si hubo linea extra, si no solo se mantiene)
+$this->pdf->SetX($textoX);
+$this->pdf->Cell(25,4,$this->t("Sala:"),0,0,'L');
+$this->pdf->Cell(0 ,4,$this->t($sala),0,1,'L');
+
+    $this->pdf->SetY($y + $altoImagen + 2);
+}
+
 
     private function bloqueTotal(float $total)
     {
