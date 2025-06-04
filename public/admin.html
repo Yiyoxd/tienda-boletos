@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
@@ -25,7 +25,7 @@
 
   <div class="encabezado-cartelera">
     <h1 class="titulo-cartelera">Panel de Administración</h1>
-    <p class="descripcion-cartelera">Gestiona el catálogo de Cinetix</p>
+    <p class="descripcion-cartelera">Gestiona el sistema de Cinetix</p>
   </div>
 
   <main class="contenedor sombra">
@@ -34,7 +34,11 @@
         <button class="tab active" onclick="mostrarTab('agregar')">Agregar Película</button>
         <button class="tab" onclick="mostrarTab('eliminar')">Eliminar Película</button>
         <button class="tab" onclick="mostrarTab('lista')">Películas Actuales</button>
+        <button class="tab" onclick="mostrarTab('usuarios')">Usuarios Registrados</button>
+        <button class="tab" onclick="mostrarTab('ventas')">Ventas</button>
       </div>
+
+      <!-- Agregar peli-->
 
       <section id="agregar" class="tab-content active formulario-admin">
         <h2>Agregar nueva película</h2>
@@ -60,45 +64,101 @@
         </form>
       </section>
 
+       <!-- Eliminar peli-->
       <section id="eliminar" class="tab-content admin-lista">
         <h2>Eliminar Película</h2>
-
         <div class="pelicula-admin">
-          <img src="img/duna.jpg" alt="Dune parte II">
+          <img src="img/duna.jpg" alt="Dune parte II" />
           <div>
             <h3>Dune parte II</h3>
             <p>Clasificación: B15</p>
           </div>
           <button>Eliminar</button>
         </div>
-
-        <div class="pelicula-admin">
-          <img src="img/emma.jpg" alt="EMMA.">
-          <div>
-            <h3>EMMA.</h3>
-            <p>Clasificación: A</p>
-          </div>
-          <button>Eliminar</button>
-        </div>
       </section>
 
+       <!--peliculas actuales-->
       <section id="lista" class="tab-content admin-lista">
         <h2>Películas Actuales</h2>
         <div class="pelicula-admin">
-          <img src="img/spiderman.jpg" alt="Spiderman">
+          <img src="img/spiderman.jpg" alt="Spiderman" />
           <div>
             <h3>Spiderman Across the Spiderverse</h3>
             <p>Clasificación: B</p>
           </div>
         </div>
-        <div class="pelicula-admin">
-          <img src="img/isla.jpg" alt="Isla de perros">
-          <div>
-            <h3>Isla de perros</h3>
-            <p>Clasificación: B</p>
-          </div>
-        </div>
       </section>
+      
+       <!--usuarios-->
+      <section id="usuarios" class="tab-content admin-lista">
+  <h2>Usuarios Registrados</h2>
+  <table class="tabla-admin">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Correo</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>Juan Pérez</td>
+        <td>juanp@gmail.com</td>
+        <td>
+          <button class="editar">Editar</button>
+          <button class="eliminar">Eliminar</button>
+        </td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>María López</td>
+        <td>maria.lopez@hotmail.com</td>
+        <td>
+          <button class="editar">Editar</button>
+          <button class="eliminar">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+       <!--ventas-->
+      <section id="ventas" class="tab-content admin-lista">
+  <h2>Historial de Ventas</h2>
+  <table class="tabla-admin">
+    <thead>
+      <tr>
+        <th>ID Venta</th>
+        <th>Usuario</th>
+        <th>Película</th>
+        <th>Fecha</th>
+        <th>Boletos</th>
+        <th>Acción</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>V001</td>
+        <td>usuario1@example.com</td>
+        <td>Spiderman</td>
+        <td>2025-06-03</td>
+        <td>2</td>
+        <td><button class="btn-cancelar">Cancelar</button></td>
+      </tr>
+      <tr>
+        <td>V002</td>
+        <td>usuario2@example.com</td>
+        <td>Dune Parte II</td>
+        <td>2025-06-02</td>
+        <td>4</td>
+        <td><button class="btn-cancelar">Cancelar</button></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
     </div>
   </main>
 
@@ -116,4 +176,3 @@
   </script>
 </body>
 </html>
-
