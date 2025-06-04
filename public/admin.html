@@ -1,0 +1,119 @@
+<!DOCTYPE html> 
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Cinetix</title>
+  <link rel="stylesheet" href="css/normalize.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Krub:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/admin.css" />
+
+</head>
+<body>
+  <div class="nav-bg">
+    <nav class="navegacion-principal contenedor">
+      <div class="nav-izquierda">
+        <div class="logo"><a href="index.php">C I N E T I X</a></div>
+        <a href="index.php">Inicio</a>
+      </div>
+      <div class="nav-derecha">
+        <a href="#">Cerrar sesión</a>
+      </div>
+    </nav>
+  </div>
+
+  <div class="encabezado-cartelera">
+    <h1 class="titulo-cartelera">Panel de Administración</h1>
+    <p class="descripcion-cartelera">Gestiona el catálogo de Cinetix</p>
+  </div>
+
+  <main class="contenedor sombra">
+    <div class="contenido-cuadro">
+      <div class="tabs">
+        <button class="tab active" onclick="mostrarTab('agregar')">Agregar Película</button>
+        <button class="tab" onclick="mostrarTab('eliminar')">Eliminar Película</button>
+        <button class="tab" onclick="mostrarTab('lista')">Películas Actuales</button>
+      </div>
+
+      <section id="agregar" class="tab-content active formulario-admin">
+        <h2>Agregar nueva película</h2>
+        <form>
+          <label for="titulo">Título:</label>
+          <input type="text" id="titulo" name="titulo" required />
+
+          <label for="clasificacion">Clasificación:</label>
+          <select id="clasificacion" name="clasificacion" required>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="B15">B15</option>
+            <option value="C">C</option>
+          </select>
+
+          <label for="descripcion">Descripción:</label>
+          <textarea id="descripcion" name="descripcion" rows="4" required></textarea>
+
+          <label for="imagen">Nombre del archivo de imagen (en /img):</label>
+          <input type="text" id="imagen" name="imagen" placeholder="ej. dune.jpg" required />
+
+          <button type="submit">Agregar Película</button>
+        </form>
+      </section>
+
+      <section id="eliminar" class="tab-content admin-lista">
+        <h2>Eliminar Película</h2>
+
+        <div class="pelicula-admin">
+          <img src="img/duna.jpg" alt="Dune parte II">
+          <div>
+            <h3>Dune parte II</h3>
+            <p>Clasificación: B15</p>
+          </div>
+          <button>Eliminar</button>
+        </div>
+
+        <div class="pelicula-admin">
+          <img src="img/emma.jpg" alt="EMMA.">
+          <div>
+            <h3>EMMA.</h3>
+            <p>Clasificación: A</p>
+          </div>
+          <button>Eliminar</button>
+        </div>
+      </section>
+
+      <section id="lista" class="tab-content admin-lista">
+        <h2>Películas Actuales</h2>
+        <div class="pelicula-admin">
+          <img src="img/spiderman.jpg" alt="Spiderman">
+          <div>
+            <h3>Spiderman Across the Spiderverse</h3>
+            <p>Clasificación: B</p>
+          </div>
+        </div>
+        <div class="pelicula-admin">
+          <img src="img/isla.jpg" alt="Isla de perros">
+          <div>
+            <h3>Isla de perros</h3>
+            <p>Clasificación: B</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    function mostrarTab(tabId) {
+      const tabs = document.querySelectorAll('.tab');
+      const contents = document.querySelectorAll('.tab-content');
+
+      tabs.forEach(tab => tab.classList.remove('active'));
+      contents.forEach(content => content.classList.remove('active'));
+
+      document.querySelector(`.tab[onclick="mostrarTab('${tabId}')"]`).classList.add('active');
+      document.getElementById(tabId).classList.add('active');
+    }
+  </script>
+</body>
+</html>
+

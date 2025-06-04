@@ -1,0 +1,85 @@
+.tabs {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.tab {
+  padding: 1rem 2rem;
+  margin: 0 0.5rem;
+  background-color: #e50914;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px 10px 0 0;
+  font-weight: bold;
+}
+
+.tab.active {
+  background-color: #c40811;
+}
+
+.tab-content {
+  display: none;
+  padding: 2rem;
+  border-top: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+.formulario-admin input, .formulario-admin textarea, .formulario-admin select {
+  width: 100%;
+  padding: 0.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.formulario-admin label {
+  font-weight: bold;
+}
+
+.formulario-admin button {
+  background-color: #e50914;
+  color: white;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.admin-lista {
+  margin-top: 2rem;
+}
+
+.pelicula-admin {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #ddd;
+  padding: 1rem 0;
+}
+
+.pelicula-admin img {
+  height: 100px;
+  margin-right: 1rem;
+}
+
+.pelicula-admin button {
+  background-color: #b30000;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.contenido-cuadro {
+  background-color: #f7f7f7; 
+  border: 1px solid #ccc;    
+  border-radius: 8px;        
+  padding: 20px;             
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1); 
+  margin-top: 20px;
+}
+
