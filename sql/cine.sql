@@ -258,3 +258,14 @@ FROM sala_funcion sf
 WHERE NOT EXISTS (
     SELECT 1 FROM asientos a WHERE a.sala_funcion_id = sf.id LIMIT 1
 );
+
+ALTER TABLE usuarios ADD COLUMN rol ENUM('admin', 'cliente') DEFAULT  'cliente';
+INSERT INTO usuarios (nombre, email, password, rol)
+VALUES ('Sofía', 'sofia@cinetix.com', '1234', 'admin');
+
+INSERT INTO reservas (usuario_id, funcion_id, total, fecha_reserva)
+VALUES (3, 2, 150, NOW());
+INSERT INTO reservas (usuario_id, funcion_id, total, fecha_reserva)
+VALUES (1, 5, 100, NOW());
+
+ SELECT * FROM reservas
